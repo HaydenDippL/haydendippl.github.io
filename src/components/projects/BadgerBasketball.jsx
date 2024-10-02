@@ -50,7 +50,8 @@ function BadgerBasketball() {
         <h1 className='title'>UW Open Rec Roster</h1>
         <div className='hbox'>
             <GitHubLink link={BADGER_BASKETBALL_GIT_REPO_URL} size={70}/>
-            <Link link={UW_OPEN_REC_ROSTER_URL} size={70}/>
+            {/* <Link link={UW_OPEN_REC_ROSTER_URL} size={70}/> */}
+            <Link message="Site is currently under maintenance" size={70}/>
         </div>
         <p style={{fontSize: '12px'}}>*Links to git repo and website</p>
         <div className='hbox' style={{marginTop: '10vh'}}>
@@ -99,7 +100,8 @@ function BadgerBasketball() {
         <div className='hbox mega-margin'>
             <div className='left' style={{width: '30vw', marginBottom: '-50px'}}>
                 <p className='pre-header'>How I Built</p>
-                <a href={UW_OPEN_REC_ROSTER_URL} style={{marginBottom: '5vh'}}><h2 className='header'>UW Open Rec Roster</h2></a>
+                {/* <a href={UW_OPEN_REC_ROSTER_URL} style={{marginBottom: '5vh'}}><h2 className='header'>UW Open Rec Roster</h2></a> */}
+                <h2 className='header' style={{marginBottom: '5vh'}}>UW Open Rec Roster</h2>
                 <p className='text'>I created the website as a React app, hosted on DigitalOceans with a domain name from DreamHost. It is able to display all 8 court schedules for each of the gyms at UW-Madison: Bakke and Nick.</p>
                 <p className='text'>The backend, built with <strong>express.js</strong>, uses server-size memoization to more efficiently handle requests, and uses logging to track user activity on the site on a <strong>TiDB server</strong>.</p>
             </div>
