@@ -1,5 +1,8 @@
 import { Link } from "react-router";
 
+// TODO: add cookies to remember what you've read
+// TODO: use cookies to have a little indicator when there is a new blog/project
+
 // TODO: add youtube link
 const YOUTUBE_LINK: string = "https://www.youtube.com";
 const GITHUB_LINK: string = "https://github.com/HaydenDippL";
@@ -8,7 +11,7 @@ const LINKEDIN_LINK: string = "https://www.linkedin.com/";
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
     return <div className="min-h-screen">
-        <div id="navbar" className="fixed w-full flex flex-row justify-between items-center gap-2 p-4 opacity-0.3 border-b border-b-black pt-8">
+        <div id="navbar" className="fixed w-full flex flex-row justify-between items-center gap-2 p-4 bg-base-100/90 border-b border-b-black pt-8 z-[9999]">
             <div className="flex flex-row gap-20">
                 <Link to="/" className="text-4xl font-semibold">
                     HaydenDippL
