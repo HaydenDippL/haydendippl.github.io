@@ -1,6 +1,137 @@
+import Carousel from "../components/Carousel";
+
 import code_image from "../assets/code.png";
 
 export default function Home() {
+    const dummy_projects: JSX.Element[] = [
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 1</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 2</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 3</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 4</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 5</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 6</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 7</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes!8</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+        <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
+            <figure>
+                <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes" />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">Shoes! 9</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
+        </div>,
+    ];
+
     return <>
         <div className="flex flex-col items-center">
             <div className="flex flex-row gap-48">
@@ -82,11 +213,12 @@ export default function Home() {
                 </div>
             </div>
             <div id="projects">
-                <div className="relative mt-36">
+                <div className="relative mt-36 mb-16">
                     <p className="text-8xl">Check Out My Projects</p>
                     <p className="text-xl text-base-content/40 absolute -left-24 bottom-4">also...</p>
                 </div>
             </div>
+            <Carousel items={dummy_projects}/>
         </div>
   </>
 }
