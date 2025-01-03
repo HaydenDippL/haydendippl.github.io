@@ -1,31 +1,26 @@
-// TODO: Implement Carousel component
-// TODO: Implement Drag and Scroll
-// TODO: Use Wheel event to scroll
-// TODO: Implement wrap around
-// TODO: Implement auto scroll when not hovering
-// TODO: Implement easing in (starting auto scroll) and out (stopping auto scroll)
-
-import { useEffect } from "react";
-
-// Planning on using absolute positioning to move the carousel items around
-// Must implement lots of logic to handle the wrap around feature
+import { useRef, useEffect, useState } from "react";
 
 interface CarouselProps {
     items: JSX.Element[];
 }
 
 export default function Carousel({ items }: CarouselProps) {
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const [isHovering, setIsHovering] = useState(false);
+    const [scrollAmount, setScrollAmount] = useState(0);
+
     useEffect(() => {
-        const carousel = document.getElementById("carousel");
-        let scrollAmount = 0;
-        let isHovering = false;
+        const carousel = carouselRef.current;
 
         function scrollStep() {
             if (!isHovering && carousel) {
-                scrollAmount += 1;
-                if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
-                    scrollAmount = 0;
-                }
+                setScrollAmount(scrollAmount => {
+                    if (scrollAmount + 1 >= carousel.scrollWidth - carousel.clientWidth) {
+                        return 0;
+                    }
+                    return scrollAmount + 1;
+                });
+
                 carousel.scrollTo({
                     left: scrollAmount,
                     behavior: "smooth"
@@ -36,25 +31,25 @@ export default function Carousel({ items }: CarouselProps) {
         const interval = setInterval(scrollStep, 50);
 
         carousel?.addEventListener("mouseenter", () => {
-            isHovering = true;
+            setIsHovering(true);
         });
 
         carousel?.addEventListener("mouseleave", () => {
-            isHovering = false;
+            setIsHovering(false);
         });
 
         return () => {
             clearInterval(interval);
             carousel?.removeEventListener("mouseenter", () => {
-                isHovering = true;
+                setIsHovering(true);
             });
             carousel?.removeEventListener("mouseleave", () => {
-                isHovering = false;
+                setIsHovering(false);
             });
         };
-    }, []);
+    }, [isHovering, scrollAmount]);
 
-    return <div id="carousel" className="w-full h-auto flex flex-row gap-4 overflow-auto">
+    return <div id="carousel" ref={carouselRef} className={`w-full h-auto flex flex-row gap-4 px-4 ${isHovering ? "overflow-auto" : "overflow-hidden"}`}>
         {items}
     </div>;
 }
