@@ -7,7 +7,7 @@ const GITHUB_LINK: string = "https://github.com/HaydenDippL";
 const LINKEDIN_LINK: string = "https://www.linkedin.com/";
 
 export default function Footer() {
-    return <div id="footer" className="w-full bg-neutral flex justify-between py-16 px-12 mt-32">
+    return <div id="footer" className="w-full h-80 bg-neutral flex  flex-row justify-between py-16 px-12">
         <div id="links" className="flex flex-row gap-6 text-2xl font-semibold">
             <div id="nav-links" className="flex flex-col gap-2">
                 <p className="font-bold mb-3">Nav</p>
