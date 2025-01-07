@@ -164,7 +164,7 @@ export default function Home() {
                     </div>
                     <div id="Community" className="mt-24">
                         <p className="font-semibold text-5xl tracking-tight w-auto">Learning <span style={{ color: "#FF308A" }}>Community</span></p>
-                        <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6 w-96">I will create a community that can to learn from me <span className="text-primary text-opacity-80">&&</span> each other</p>
+                        <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6 w-96">I will create a community that can to learn from me <span className="text-primary text-opacity-100">&&</span> each other</p>
                     </div>
                 </div>
             </div>
