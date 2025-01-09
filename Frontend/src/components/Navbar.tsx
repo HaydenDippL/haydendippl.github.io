@@ -2,6 +2,7 @@ import { Link } from "react-router";
 
 // TODO: add cookies to remember what you've read
 // TODO: use cookies to have a little indicator when there is a new blog/project
+// TODO: add control + K to search bar and icons in the search bar itself it indicate this
 
 // TODO: add youtube link
 const YOUTUBE_LINK: string = "https://www.youtube.com";
