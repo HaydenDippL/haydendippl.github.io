@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
+import BlogCard from "../components/BlogCard";
+
 import dummy_image from "../assets/dummy-image.png";
 
-type Card = {
-    img: HTMLImageElement | null;
-    title: string;
-    subtitle: string;
-    date_created: Date;
+type BlogPreview = {
+    blog_id: number,
+    starred: boolean,
+    image_source: string,
+    title: string,
+    description: string
 };
 
 export default function Blogs() {
@@ -15,19 +18,24 @@ export default function Blogs() {
     useEffect(get_cards, []);
 
     function get_cards(): void {
-        const card: JSX.Element = <div className="card bg-base-100 w-80 shadow-xl shrink-0 transform transition-transform duration-300 hover:scale-110">
-            <figure>
-                <img
-                    src={dummy_image}
-                    alt="Dummy Image" />
-            </figure>
-            <div className="card-body bg-base-200 rounded-b-2xl">
-                <h2 className="card-title">Dummy</h2>
-                <p>This is dummy text</p>
-            </div>
-        </div>;
+        const DUMMY_BLOG_PREVIEW: BlogPreview = {
+            blog_id: 90120,
+            starred: true,
+            image_source: dummy_image,
+            title: "Trying Django for the First Time",
+            description: "Implementing Django as the backend for this website",
+        };
 
-        const cards: JSX.Element[] = Array.from({ length: 10}, () => card);
+        const cards: JSX.Element[] = Array.from({ length: 10}, (_, i) => {
+            return <BlogCard
+                key={i}
+                blog_id={DUMMY_BLOG_PREVIEW.blog_id}
+                starred={Math.random() > 0.5}
+                image_source={DUMMY_BLOG_PREVIEW.image_source}
+                title={DUMMY_BLOG_PREVIEW.title}
+                description={DUMMY_BLOG_PREVIEW.description}
+            />;
+        });
 
         set_cards(cards);
     }
