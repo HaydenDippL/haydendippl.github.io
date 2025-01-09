@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { DateTime } from "luxon";
 
 import BlogCard from "../components/BlogCard";
 import { BlogData } from "../types/BlogTypes";
@@ -8,6 +9,8 @@ import dinosaur_image from "../assets/dino-scene.png";
 import coming_soon_image from "../assets/coming-soon.png"
 
 // TODO: Implement skeleton
+
+const date_arbitrary: Date = new Date();
 
 const DUMMY_BLOG: BlogData = {
     id: "3890498371",
@@ -54,12 +57,16 @@ export default function Blog() {
     useEffect(get_blog, []);
 
     function get_blog(): void {
-        // TODO: replace
+        // TODO: replace viewed
         const viewed: Boolean = true; // FIXME: modify for testing purposes
         const color: string = viewed ? "bg-primary" : "bg-secondary";
         const mask: string = DUMMY_BLOG.starred ? "mask mask-star-2" : "mask mask-circle";
         const display: boolean = !viewed || DUMMY_BLOG.starred;
         const badge: JSX.Element = <div className={`absolute -top-6 -right-6 w-12 h-12 ${color} ${mask}`} />;
+
+        const date_created: string = DateTime.fromJSDate(DUMMY_BLOG.date_created).toFormat("LLL d, y");
+        const date_modified: string = DateTime.fromJSDate(DUMMY_BLOG.date_modified).toFormat("t ZZZZ, LLL d, y");
+        const display_modified_date: boolean = DUMMY_BLOG.date_created !== DUMMY_BLOG.date_modified;
 
         // TODO: luxon dates
         const blog: JSX.Element = <>
@@ -71,8 +78,8 @@ export default function Blog() {
                 <p id="title" className="text-6xl font-bold mt-8">{DUMMY_BLOG.title}</p>
                 <p id="sub-title" className="text-3xl font-normal mt-8">{DUMMY_BLOG.sub_title}</p>
                 <div id="dates" className="mt-6 mb-16">
-                    <p id="date-created" className="text-xl mt-6">{String(DUMMY_BLOG.date_created)}</p>
-                    { DUMMY_BLOG.date_created !== DUMMY_BLOG.date_modified && <p id="date-edited" className="text-xl">Edited: {String(DUMMY_BLOG.date_modified)}</p> }
+                    <p id="date-created" className="text-xl mt-6">Published: { date_created }</p>
+                    { display_modified_date && <p id="date-edited" className="text-xl">Edited: { date_modified }</p> }
                 </div>
                 { DUMMY_BLOG.content }
             </div>
