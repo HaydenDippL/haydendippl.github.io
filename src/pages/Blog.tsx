@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import BlogCard from "../components/BlogCard";
 
 import dummy_image from "../assets/dummy-image.png";
+import dinosaur_image from "../assets/dino-scene.png";
+import coming_soon_image from "../assets/coming-soon.png"
 
 // TODO: Implement skeleton
 
@@ -53,7 +55,7 @@ const DUMMY_BLOG: Blog = {
 const coming_soon: JSX.Element = <BlogCard
     blog_id={-2}
     starred={false}
-    image_source={dummy_image}
+    image_source={coming_soon_image}
     title=" Next Blog Coming Soon"
     description="I post these blogs about once a week, check back in a couple of days"
 />
@@ -61,7 +63,7 @@ const coming_soon: JSX.Element = <BlogCard
 const beginning_of_time: JSX.Element = <BlogCard
     blog_id={-1}
     starred={false}
-    image_source={dummy_image}
+    image_source={dinosaur_image}
     title="There are no previous blogs"
     description="You reached the beginning of time, say hi to the dinosaurs"
 />
