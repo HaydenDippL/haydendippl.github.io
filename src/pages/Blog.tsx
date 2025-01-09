@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 import BlogCard from "../components/BlogCard";
+import { BlogData } from "../types/BlogTypes";
 
 import dummy_image from "../assets/dummy-image.png";
 import dinosaur_image from "../assets/dino-scene.png";
@@ -8,26 +9,7 @@ import coming_soon_image from "../assets/coming-soon.png"
 
 // TODO: Implement skeleton
 
-type Blog = {
-    id: string;
-    title: string;
-    sub_title: string;
-    starred: boolean;
-    date_created: Date;
-    date_modified: Date;
-    image: string;
-    content: JSX.Element;
-    prev: OtherBlog | null;
-    next: OtherBlog | null;
-};
-
-// TODO: create a type folder??
-// TODO: finish OtherBlog
-type OtherBlog = {
-    title: string
-}
-
-const DUMMY_BLOG: Blog = {
+const DUMMY_BLOG: BlogData = {
     id: "3890498371",
     title: "Trying Django for the First Time",
     sub_title: "Implementing Django as the backend for this website",
@@ -46,9 +28,7 @@ const DUMMY_BLOG: Blog = {
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-    </div>,
-    prev: null,
-    next: null
+    </div>
 };
 
 // TODO: show some kind og building icon as photo
@@ -101,7 +81,7 @@ export default function Blog() {
         set_blog(blog);
     }
 
-    //FIXME: fix the the error where the shadow mismatches when card sizes are different
+    // TODO: implement next and prev, not dummy values...
     return <div className="flex flex-col justify-center items-center w-full">
         <div className="flex flex-col w-7/12 items-start">
             { blog }

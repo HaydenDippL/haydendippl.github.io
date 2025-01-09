@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react";
 
 import BlogCard from "../components/BlogCard";
+import { BlogPreviewData } from "../types/BlogTypes";
 
 import dummy_image from "../assets/dummy-image.png";
-
-type BlogPreview = {
-    blog_id: number,
-    starred: boolean,
-    image_source: string,
-    title: string,
-    description: string
-};
 
 export default function Blogs() {
     const [cards, set_cards] = useState<JSX.Element[] | null>(null);
@@ -18,7 +11,7 @@ export default function Blogs() {
     useEffect(get_cards, []);
 
     function get_cards(): void {
-        const DUMMY_BLOG_PREVIEW: BlogPreview = {
+        const DUMMY_BLOG_PREVIEW: BlogPreviewData = {
             blog_id: 90120,
             starred: true,
             image_source: dummy_image,

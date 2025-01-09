@@ -1,12 +1,6 @@
-type BlogCardProps = {
-    blog_id: number,
-    starred: boolean,
-    image_source: string,
-    title: string,
-    description: string
-};
+import { BlogPreviewData } from "../types/BlogTypes";
 
-export default function BlogCard({ blog_id, starred, image_source, title, description }: BlogCardProps) {
+export default function BlogCard({ blog_id, starred, image_source, title, description }: BlogPreviewData) {
     /// TODO: implement cache / cookies, account for the no_next / no_prev cards and don't display badges for them
     blog_id;
     const viewed: Boolean = Math.random() > 0.5;
