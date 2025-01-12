@@ -9,3 +9,6 @@ class Project(models.Model):
     modified = models.DateTimeField(auto_now=True, help_text="The last modified date-time of the project")
     content = models.TextField(help_text="The html (not react jsx) content of the project. This does not contain images, but links to the images when develiered")
     image = models.ImageField(upload_to="projects/images", help_text="The path to the image in the MEDIA folder of Django")
+
+    def __str__(self):
+        return f"{self.title} [{self.created.strftime("%A, %b %d, %Y")}]"
