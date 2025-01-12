@@ -1,8 +1,7 @@
 from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from rest_framework import status
-# from .models import Blog
-# from .serializer import BlogSerializer
+from ..models.blog import Blog
 
 class BlogDetail(APIView):
     def get(self, request, id):
