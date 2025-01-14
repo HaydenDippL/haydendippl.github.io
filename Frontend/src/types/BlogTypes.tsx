@@ -1,18 +1,18 @@
 export type BlogPreviewData = {
-    blog_id: number,
+    id: number,
     starred: boolean,
-    image_source: string,
+    image: string,
     title: string,
     description: string
 };
 
 export type BlogData = {
-    id: string;
+    id: number;
     title: string;
-    sub_title: string;
+    description: string;
     starred: boolean;
-    date_created: Date;
-    date_modified: Date;
+    created: Date;
+    modified: Date;
     image: string;
     content: JSX.Element;
 };
