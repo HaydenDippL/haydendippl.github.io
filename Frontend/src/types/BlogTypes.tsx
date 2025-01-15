@@ -11,8 +11,9 @@ export type BlogData = {
     title: string;
     description: string;
     starred: boolean;
-    created: Date;
-    modified: Date;
+    created: string;
+    published: string;
+    modified: string;
     image: string;
     content: JSX.Element;
 };

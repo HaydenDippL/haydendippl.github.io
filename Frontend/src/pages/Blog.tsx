@@ -59,7 +59,6 @@ export default function Blog() {
 
     function get_blog(): void {
         const url = `${import.meta.env.VITE_BACKEND_URL}/blog/${id}`;
-        console.log(url)
         fetch(url)
             .then(resp => resp.json())
             .then((blog_data: BlogData) => {
@@ -68,24 +67,25 @@ export default function Blog() {
                 const mask: string = blog_data.starred ? "mask mask-star-2" : "mask mask-circle";
                 const display: boolean = !viewed || blog_data.starred;
                 const badge_element: JSX.Element = <div className={`absolute -top-6 -right-6 w-12 h-12 ${color} ${mask}`} />;
-
-                const date_created: string = DateTime.fromJSDate(blog_data.created).toFormat("LLL d, y");
-                const date_modified: string = DateTime.fromJSDate(blog_data.modified).toFormat("t ZZZZ, LLL d, y");
+                const date_published: string = DateTime.fromISO(blog_data.published).toFormat("LLL d, y");
+                const date_modified: string = DateTime.fromISO(blog_data.modified).toFormat("t ZZZZ, LLL d, y");
                 const display_modified_date: boolean = blog_data.created !== blog_data.modified;
+
+                const image_source: string = `${import.meta.env.VITE_BACKEND_URL}/${blog_data.image}`
 
                 const blog_element: JSX.Element = <>
                     <div id="feature-image" className="relative">
-                        <img src={blog_data.image} className="rounded-xl relative w-auto" />
+                        <img src={image_source} className="rounded-xl relative w-auto" />
                         { display && badge_element }
                     </div>
                     <div className="px-2">
                         <p id="title" className="text-6xl font-bold mt-8">{blog_data.title}</p>
                         <p id="sub-title" className="text-3xl font-normal mt-8">{blog_data.description}</p>
                         <div id="dates" className="mt-6 mb-16">
-                            <p id="date-created" className="text-xl mt-6">Published: { date_created }</p>
+                            <p id="date-created" className="text-xl mt-6">Published: { date_published }</p>
                             { display_modified_date && <p id="date-edited" className="text-xl">Edited: { date_modified }</p> }
                         </div>
-                        { blog_data.content }
+                        <div dangerouslySetInnerHTML={{ __html: blog_data.content}} />
                     </div>
                 </>;
 
