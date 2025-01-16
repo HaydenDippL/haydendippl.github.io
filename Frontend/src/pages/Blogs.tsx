@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 
 import BlogCard from "../components/BlogCard";
-import { BlogData, BlogPreviewData } from "../types/BlogTypes";
+import { BlogData } from "../types/BlogTypes";
+
+const total_skeleton_elements: number = 8;
+const skeleton: JSX.Element[] = Array.from({ length: total_skeleton_elements }).map((_, i) => <BlogCard key={i} />);
 
 export default function Blogs() {
-    const [cards, set_cards] = useState<JSX.Element[] | null>(null);
+
+    const [cards, set_cards] = useState<JSX.Element[]>(skeleton);
 
     useEffect(get_cards, []);
 

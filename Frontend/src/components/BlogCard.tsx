@@ -1,8 +1,14 @@
-import { NavigateFunction, useNavigate } from "react-router";
+import { Link } from "react-router";
 
-import { BlogPreviewData } from "../types/BlogTypes";
+import { BlogPreviewProps } from "../types/BlogTypes";
 
-export default function BlogCard({ id, starred, image, title, description }: BlogPreviewData) {
+import SkeletonText from "./SkeletonText";
+import { SkeletonTextProps } from "./SkeletonText";
+
+export default function BlogCard({id, starred, image, title, description}: BlogPreviewProps) {
+    if (id === undefined || starred === undefined || image === undefined || title === undefined || description === undefined) 
+        return <SkeletonBlogCard />
+
     /// TODO: implement cache / cookies, account for the no_next / no_prev cards and don't display badges for them
     const viewed: Boolean = Math.random() > 0.5;
     const color: string = viewed ? "bg-primary" : "bg-secondary";
@@ -12,15 +18,7 @@ export default function BlogCard({ id, starred, image, title, description }: Blo
     const display: boolean = !viewed || starred;
     const badge: JSX.Element = <div className={`absolute z-[999] ${size} ${placement} ${color} ${mask}`} />;
 
-    const navigate: NavigateFunction = useNavigate() 
-    function redirect(): void {
-        navigate(`/blog/${id}`);
-    }
-
-    return <div
-        className="relative transform transition-transform duration-300 hover:scale-110"
-        onClick={redirect}
-    >
+    return <Link to={`/blog/${id}`} className="relative transform transition-transform duration-300 hover:scale-110">
         { display && badge }
         <div className="card bg-base-100 w-80 shadow-xl shrink-0">
             <figure>
@@ -33,5 +31,39 @@ export default function BlogCard({ id, starred, image, title, description }: Blo
                 <p className="">{description}</p>
             </div>
         </div>
-    </div>;
+    </Link>
+}
+
+function SkeletonBlogCard() {
+    const skeleton_title_params: SkeletonTextProps = {
+        min_lines: 1,
+        max_lines: 1.8,
+        min_line_width: 80,
+        min_last_line_width: 40,
+        tailwind_height_class: "h-6"
+    }
+
+    const skeleton_text_params: SkeletonTextProps = {
+        min_lines: 1.2,
+        max_lines: 3.2,
+        min_line_width: 80,
+        min_last_line_width: 20,
+        tailwind_height_class: "h-4"
+    }
+
+    return <div
+            className="relative transform transition-transform duration-300 hover:scale-110"
+        >
+            <div className="card bg-base-100 w-80 shadow-xl shrink-0">
+                <div className="w-full h-48 skeleton rounded-b-none" />
+                <div className="card-body bg-base-200 rounded-b-2xl">
+                    <div className="flex flex-col mb-3 gap-3">
+                        <SkeletonText {...skeleton_title_params} />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <SkeletonText {...skeleton_text_params} />
+                    </div>
+                </div>
+            </div>
+        </div>;
 }
