@@ -30,9 +30,9 @@ export default function Blogs() {
                 });
 
                 set_cards(cards);
-            });
-            // TODO: catch error
-    }
+            })
+            .catch(error => console.log(error));
+        }
 
     return <>
         <div className="flex flex-col items-center">

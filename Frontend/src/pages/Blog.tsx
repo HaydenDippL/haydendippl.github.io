@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router";
+import { NavigateFunction, useNavigate } from "react-router";
+
 import { DateTime } from "luxon";
 
 import BlogCard from "../components/BlogCard";
@@ -7,30 +9,6 @@ import { BlogData } from "../types/BlogTypes";
 
 import dinosaur_image from "../assets/dino-scene.png";
 import coming_soon_image from "../assets/coming-soon.png"
-
-// TODO: Implement skeleton
-
-// const DUMMY_BLOG: BlogData = {
-//     id: 1,
-//     title: "Trying Django for the First Time",
-//     sub_title: "Implementing Django as the backend for this website",
-//     starred: true,
-//     date_created: new Date(),
-//     date_modified: new Date(),
-//     image: dummy_image,
-//     content: <div className="flex flex-col gap-6 text-3xl">
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae enim beatae rem possimus praesentium animi, perferendis tenetur aliquam, placeat earum blanditiis dolorum reprehenderit. Officiis autem, minus nihil voluptate neque recusandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellat, animi laborum ipsum reprehenderit minima, dicta unde voluptatem nam vel suscipit libero. Quae impedit vitae inventore sapiente dolores! Sapiente, harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ducimus excepturi deleniti doloremque minus quis provident exercitationem ex alias inventore molestiae nisi, dolore perspiciatis autem veniam distinctio, incidunt, itaque iure!</p>
-//     </div>
-// };
 
 // TODO: show some kind og building icon as photo
 const coming_soon: JSX.Element = <BlogCard
@@ -52,15 +30,24 @@ const beginning_of_time: JSX.Element = <BlogCard
 
 export default function Blog() {
     const { id } = useParams();
-
     const [blog, set_blog] = useState<JSX.Element | null>(null);
+    const navigator: NavigateFunction = useNavigate();
+
     
     useEffect(get_blog, []);
 
     function get_blog(): void {
         const url = `${import.meta.env.VITE_BACKEND_URL}/blog/${id}`;
         fetch(url)
-            .then(resp => resp.json())
+            .then(resp => {
+                if (resp.status === 200) return resp.json();
+                else if (resp.status === 404) {
+                    console.log(resp.status)
+                    console.log(resp)
+                    navigator("/blog/not-found");
+                    return Promise.reject("404 Not Found");
+                }
+            })
             .then((blog_data: BlogData) => {
                 const viewed: Boolean = true; // FIXME: modify for testing purposes
                 const color: string = viewed ? "bg-primary" : "bg-secondary";
@@ -90,7 +77,8 @@ export default function Blog() {
                 </>;
 
                 set_blog(blog_element);
-            });
+            })
+            .catch(error => console.error(error));
             // TODO: catch
     }
 
