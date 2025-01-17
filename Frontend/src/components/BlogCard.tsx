@@ -5,30 +5,35 @@ import { BlogPreviewProps } from "../types/BlogTypes";
 import SkeletonText from "./SkeletonText";
 import { SkeletonTextProps } from "./SkeletonText";
 
-export default function BlogCard({id, starred, image, title, description}: BlogPreviewProps) {
-    if (id === undefined || starred === undefined || image === undefined || title === undefined || description === undefined) 
-        return <SkeletonBlogCard />
+export default function BlogCard(blog_preview: BlogPreviewProps) {
+    if (
+        blog_preview.id === undefined ||
+        blog_preview.starred === undefined ||
+        blog_preview.image === undefined ||
+        blog_preview.title === undefined ||
+        blog_preview.description === undefined
+    ) return <SkeletonBlogCard />
 
     /// TODO: implement cache / cookies, account for the no_next / no_prev cards and don't display badges for them
     const viewed: Boolean = Math.random() > 0.5;
     const color: string = viewed ? "bg-primary" : "bg-secondary";
-    const mask: string = starred ? "mask mask-star-2 " : "mask mask-circle";
-    const placement: string = starred ? "-top-3.5 -right-3.5" : "-top-2 -right-2";
-    const size: string = starred ? "w-8 h-8" : "w-5 h-5"
-    const display: boolean = !viewed || starred;
+    const mask: string = blog_preview.starred ? "mask mask-star-2 " : "mask mask-circle";
+    const placement: string = blog_preview.starred ? "-top-3.5 -right-3.5" : "-top-2 -right-2";
+    const size: string = blog_preview.starred ? "w-8 h-8" : "w-5 h-5"
+    const display: boolean = !viewed || blog_preview.starred;
     const badge: JSX.Element = <div className={`absolute z-[999] ${size} ${placement} ${color} ${mask}`} />;
 
-    return <Link to={`/blog/${id}`} className="relative transform transition-transform duration-300 hover:scale-110">
+    return <Link to={`/blog/${blog_preview.id}`} className="relative transform transition-transform duration-300 hover:scale-110">
         { display && badge }
         <div className="card bg-base-100 w-80 shadow-xl shrink-0">
             <figure>
                 <img
-                    src={image}
-                    alt={title} />
+                    src={`${import.meta.env.VITE_BACKEND_URL}/${blog_preview.image}`}
+                    alt={blog_preview.title} />
             </figure>
             <div className="card-body bg-base-200 rounded-b-2xl">
-                <p className="card-title">{title}</p>
-                <p className="">{description}</p>
+                <p className="card-title">{blog_preview.title}</p>
+                <p className="">{blog_preview.description}</p>
             </div>
         </div>
     </Link>

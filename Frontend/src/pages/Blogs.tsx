@@ -17,18 +17,8 @@ export default function Blogs() {
 
         fetch(url)
             .then(resp => resp.json())
-            .then((data: BlogData[]) => {
-                const cards = data.map((blog, i) => {
-                    return <BlogCard
-                        key={i}
-                        id={blog.id}
-                        title={blog.title}
-                        description={blog.description}
-                        starred={blog.starred}
-                        image={`${import.meta.env.VITE_BACKEND_URL}/${blog.image}`}
-                    />;
-                });
-
+            .then((blogs: BlogData[]) => {
+                const cards = blogs.map((blog, i) => <BlogCard key={i} {...blog} />);
                 set_cards(cards);
             })
             .catch(error => console.log(error));

@@ -25,6 +25,8 @@ export type BlogData = {
     modified: string;
     image: string;
     content: JSX.Element;
+    next?: BlogPreviewData | null;
+    prev?: BlogPreviewData | null;
 };
 
 // same as BlogData but types may not be present, used for skeletons
