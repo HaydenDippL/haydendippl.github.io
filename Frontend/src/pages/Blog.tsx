@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router";
-import { NavigateFunction, useNavigate } from "react-router";
+import { Link, useParams } from "react-router";
 
 import { DateTime } from "luxon";
 
@@ -30,11 +29,12 @@ const beginning_of_time: JSX.Element = <BlogCard
 export default function Blog() {
     const { id } = useParams();
     const [blog, set_blog] = useState<BlogData | undefined>(undefined);
-    const navigator: NavigateFunction = useNavigate();
+    const [not_found, set_not_found] = useState<boolean>(false);
 
     useEffect(() => {
+        set_not_found(false);
         set_blog(undefined);
-        get_blog()
+        get_blog();
     }, [id]);
 
     function get_blog(): void {
@@ -44,7 +44,7 @@ export default function Blog() {
                 if (resp.status === 200) {
                     return resp.json();
                 } else if (resp.status === 404) {
-                    navigator("/blog/not-found");
+                    set_not_found(true);
                     return Promise.reject("404 Not Found");
                 }
             })
@@ -52,7 +52,9 @@ export default function Blog() {
             .catch(error => console.error(error)); // FIXME: more comprehensive catch
     }
 
-    // TODO: implement next and prev, not dummy values...
+    if (not_found)
+        return <BlogNotFound />
+    
     return <div className="flex flex-col justify-center items-center w-full">
         <div className="flex flex-col w-7/12 items-start">
             <BlogContent {...blog} />
@@ -69,7 +71,7 @@ export default function Blog() {
                 { blog && blog.prev === null ? beginning_of_time : <BlogCard {...blog?.prev} />}
             </div>
         </div>
-    </div>;
+    </div>
 }
 
 function BlogContent(blog: BlogDataProps): JSX.Element {
@@ -158,5 +160,13 @@ function BlogSkeleton(): JSX.Element {
                 <div className="flex flex-col gap-[0.75rem]"><SkeletonText {...skeleton_text_params} /></div>
             </div>
         </div>
+    </div>
+}
+
+function BlogNotFound(): JSX.Element {
+    return <div className="text-2xl font-bold pl-6">
+        <p>404: Blog Not Found :(</p>
+        <p>This blog doesn't exist, but I bet it would be pretty cool...</p>
+        <p>Try going <Link to="/home" className="underline text-primary">Home</Link> or finding different <Link to="/blogs" className="underline text-primary">Blogs</Link></p>
     </div>
 }
