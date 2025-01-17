@@ -24,14 +24,14 @@ class BlogDetail(APIView):
             next_blog = Blog.objects.filter(
                 published__gt = blog.published, published__lt = timezone.now()
             ).order_by("published").first()
-            data.next = None if not next_blog else BlogPreviewSerializer(next_blog).data
+            data["next"] = None if not next_blog else BlogPreviewSerializer(next_blog).data
         
         get_prev = request.GET.get("prev", "false").lower()
         if get_prev == "true":
             prev_blog = Blog.objects.filter(
                 published__lt = blog.published
             ).order_by("-published").first()
-            data.prev = None if not prev_blog else BlogPreviewSerializer(prev_blog).data
+            data["prev"] = None if not prev_blog else BlogPreviewSerializer(prev_blog).data
 
         response = Response(data)
         return response
