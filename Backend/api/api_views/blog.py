@@ -59,12 +59,7 @@ def get_blogs(request):
     if starred.lower() == "true":
         blogs = blogs.filter(starred=True)
     elif starred.lower() == "false":
-        pass # Do nothing to select both starred and unstarred
-    else:
-        return Response(
-            {"error": "Invalid value for 'starred'. Must be 'true' or 'false'."},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
+        blogs = blogs.filter(starred=False)
 
     try:
         n = int(request.GET.get("n", -1))
