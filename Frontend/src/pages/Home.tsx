@@ -1,9 +1,9 @@
 import Carousel from "../components/Carousel";
+import CodeAnimation from "../components/CodeAnimation";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-import code_image from "../assets/code.png";
 import { BlogPreviewData } from "../types/BlogTypes";
 
 const dummy_projects: JSX.Element[] = [
@@ -153,10 +153,12 @@ export default function Home() {
                     />
                 </div>
             </div>
-            <div className="flex flex-row gap-24 justify-center items-center mt-24">
-                <img src={code_image} alt="Code Image" className="w-5/12"/>
+            <div className="flex flex-row gap-24 justify-center items-start mt-32">
+                <div className="w-9/12">
+                    <CodeAnimation />
+                </div>
                 <div className="flex flex-col gap-12">
-                    <div id="Junior" className="w-96 mt-12">
+                    <div id="Junior" className="w-96">
                         <p className="font-semibold text-5xl tracking-tight">Experience the <span style={{
                             background: "linear-gradient(to right, #308AFF, #FF308A)",
                             WebkitBackgroundClip: "text",
