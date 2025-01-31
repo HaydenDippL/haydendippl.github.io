@@ -165,7 +165,7 @@ export default function Home() {
                             backgroundClip: "text",
                             WebkitTextFillColor: "transparent"
                         }}>junior experience</span></p>
-                        <p className="font-semibold text-2xl tracking-tight mt-6">journey &gt;&gt; experience</p>
+                        <p className="font-semibold text-2xl tracking-tight mt-6 azeret-mono">journey &gt;&gt; dest</p>
                         <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6">I want to be able to share my experience breaking into the software development industry...</p>
                     </div>
                     <div id="Community" className="mt-24">
