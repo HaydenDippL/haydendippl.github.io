@@ -1,5 +1,7 @@
 import { Link } from "react-router"
 
+import profile_photo from "../assets/pfp.jpg";
+
 // TODO: add youtube link
 const YOUTUBE_LINK: string = "https://www.youtube.com";
 const GITHUB_LINK: string = "https://github.com/HaydenDippL";
@@ -43,7 +45,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-row justify-end items-center gap-3">
                 <p>Designed and Created by Hayden Dippel</p>
-                <div className="h-14 w-14 bg-gray-300 mask mask-circle mx-3.5"></div>
+                <img className="h-14 w-14 mask mask-circle mx-3.5" src={profile_photo} />
             </div>
         </div>
     </div>

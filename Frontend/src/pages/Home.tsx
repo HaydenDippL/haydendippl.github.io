@@ -4,6 +4,8 @@ import CodeAnimation from "../components/CodeAnimation";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
+import profile_photo from "../assets/pfp.jpg";
+
 import { BlogPreviewData } from "../types/BlogTypes";
 
 const dummy_projects: JSX.Element[] = [
@@ -145,7 +147,7 @@ export default function Home() {
                 </div>
                 {/* TODO: change to image */}
                 <div id="Picture" className="relative pb-12">
-                    <div className="w-80 h-80 bg-gray-300 mask mask-circle"></div>
+                    <img className="w-80 h-80 mask mask-circle" src={profile_photo} />
                     <img
                         src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/e/e3/University_of_Wisconsin%E2%80%93Madisonlogo_square.png"
                         alt="University of Wisconsin-Madison Logo"
