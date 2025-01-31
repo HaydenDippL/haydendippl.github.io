@@ -193,7 +193,7 @@ export default function Home() {
                 </div>
             </div>
             <Carousel items={dummy_projects}/>
-            <button className="btn btn-secondary btn-lg mt-24">Contact Me</button>
+            {/* <button className="btn btn-secondary btn-lg mt-24">Contact Me</button> */}
         </div>
   </>
 }
