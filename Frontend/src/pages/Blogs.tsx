@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
+import { get_blog_previews } from "../scripts/Blogs";
+
 import BlogCard from "../components/BlogCard";
-import { BlogData } from "../types/BlogTypes";
+import { BlogPreviewData } from "../types/BlogTypes";
 
 const total_skeleton_elements: number = 8;
 const skeleton: JSX.Element[] = Array.from({ length: total_skeleton_elements }).map((_, i) => <BlogCard key={i} />);
@@ -10,19 +12,14 @@ export default function Blogs() {
 
     const [cards, set_cards] = useState<JSX.Element[]>(skeleton);
 
-    useEffect(get_cards, []);
+    useEffect(() => {
+        const blog_previews: BlogPreviewData[] = get_blog_previews();
+        const blog_cards: JSX.Element[] = blog_previews.map((blog_preview, i) => {
+            return <BlogCard key={i} {...blog_preview} />
+        });
 
-    function get_cards(): void {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/blogs?preview=true`;
-
-        fetch(url)
-            .then(resp => resp.json())
-            .then((blogs: BlogData[]) => {
-                const cards = blogs.map((blog, i) => <BlogCard key={i} {...blog} />);
-                set_cards(cards);
-            })
-            .catch(error => console.log(error));
-        }
+        set_cards(blog_cards);
+    }, []);
 
     return <>
         <div className="flex flex-col items-center">

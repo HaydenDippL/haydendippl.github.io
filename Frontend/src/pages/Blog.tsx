@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router";
 
 import { DateTime } from "luxon";
 
+import { get_blog } from "../scripts/Blogs";
+
 import BlogCard from "../components/BlogCard";
 import { BlogData, BlogDataProps } from "../types/BlogTypes";
 
@@ -34,29 +36,16 @@ export default function Blog() {
     useEffect(() => {
         set_not_found(false);
         set_blog(undefined);
-        get_blog();
+        const requested_blog: BlogData | undefined = get_blog(id);
+        if (requested_blog == undefined) set_not_found(true);
+        else set_blog(requested_blog);
     }, [id]);
-
-    function get_blog(): void {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/blog/${id}?next=true&prev=true`;
-        fetch(url)
-            .then(resp => {
-                if (resp.status === 200) {
-                    return resp.json();
-                } else if (resp.status === 404) {
-                    set_not_found(true);
-                    return Promise.reject("404 Not Found");
-                }
-            })
-            .then((blog_data: BlogData) => set_blog(blog_data))
-            .catch(error => console.error(error)); // FIXME: more comprehensive catch
-    }
 
     if (not_found)
         return <BlogNotFound />
     
     return <div className="flex flex-col justify-center items-center w-full">
-        <div className="flex flex-col w-7/12 items-start">
+        <div className="flex flex-col w-1/2 items-start">
             <BlogContent {...blog} />
         </div>
         <div id="post-blog" className="flex flex-col w-7/12 ml-[-5%] mt-10 items-center gap-1">
@@ -96,11 +85,9 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
     const date_modified: string = DateTime.fromISO(blog.modified).toFormat("t ZZZZ, LLL d, y");
     const display_modified_date: boolean = blog.created !== blog.modified;
 
-    const image_source: string = `${import.meta.env.VITE_BACKEND_URL}/${blog.image}`
-
     return <>
         <div id="feature-image" className="relative">
-            <img src={image_source} className="rounded-xl relative w-auto" />
+            <img src={blog.image} className="rounded-xl relative" />
             { display && badge_element }
         </div>
         <div className="px-2">
@@ -110,7 +97,9 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
                 <p id="date-created" className="text-xl mt-6">Published: { date_published }</p>
                 { display_modified_date && <p id="date-edited" className="text-xl">Edited: { date_modified }</p> }
             </div>
-            <div dangerouslySetInnerHTML={{ __html: blog.content}} />
+            <div className="prose prose-lg">
+                { blog.content }
+            </div>
         </div>
     </>
 }

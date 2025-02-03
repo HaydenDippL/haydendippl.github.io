@@ -6,7 +6,9 @@ import { Link } from "react-router";
 
 import profile_photo from "../assets/pfp.jpg";
 
-import { BlogPreviewData } from "../types/BlogTypes";
+import { BlogPreviewData, PinnedRecentBlogs } from "../types/BlogTypes";
+
+import { get_pinned_and_recent } from "../scripts/Blogs";
 
 const dummy_projects: JSX.Element[] = [
     <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
@@ -200,11 +202,6 @@ export default function Home() {
   </>
 }
 
-type PinnedRecentBlogs = {
-    pinned: BlogPreviewData[]
-    recent: BlogPreviewData[]
-};
-
 function BlogList(): JSX.Element {
     const [blogs, set_blogs] = useState<PinnedRecentBlogs | null>(null)
     const total_blogs: number = 5;
@@ -212,49 +209,9 @@ function BlogList(): JSX.Element {
     const skeleton_recent_blogs: number = total_blogs - skeleton_pinned_blogs;
 
     useEffect(() => {
-        const fetchBlogs = async () => {
-            try {
-                const [pinned_blogs, recent_blogs] = await Promise.all([
-                    get_pinned_blogs(),
-                    get_recent_blogs()
-                ]);
-
-                const num_pinned_blogs: number = pinned_blogs.length;
-                const num_recent_blogs: number = total_blogs - num_pinned_blogs;
-
-                set_blogs({
-                    pinned: pinned_blogs,
-                    recent: recent_blogs.slice(0, num_recent_blogs)
-                });
-            } catch (error) {
-                console.error('Error fetching blogs:', error);
-            }
-        };
-    
-        fetchBlogs();
+        const pinned_and_recent_blogs: PinnedRecentBlogs = get_pinned_and_recent();
+        set_blogs(pinned_and_recent_blogs);
     }, []);
-
-    async function get_pinned_blogs(): Promise<BlogPreviewData[]> {
-        const pinned_blogs: BlogPreviewData[] = await fetch(`${import.meta.env.VITE_BACKEND_URL}/blogs?n=3&preview=true&starred=true`)
-            .then(resp => resp.json())
-            .catch(error => {
-                console.error(error)
-                return [];
-            });
-
-        return pinned_blogs
-    }
-
-    async function get_recent_blogs(): Promise<BlogPreviewData[]> {
-        const recent_blogs: BlogPreviewData[] = await fetch(`${import.meta.env.VITE_BACKEND_URL}/blogs?n=5&preview=true&starred=false`)
-            .then(resp => resp.json())
-            .catch(error => {
-                console.error(error)
-                return [];
-            });
-
-        return recent_blogs
-    }
 
     return  <div id="blogs-display" className="card bg-black bg-opacity-10 shadow-xl w-auto">
         <div className="card-body gap-4">

@@ -1,6 +1,7 @@
 export type BlogPreviewData = {
     id: number,
     starred: boolean,
+    published: string;
     image: string,
     title: string,
     description: string
@@ -10,6 +11,7 @@ export type BlogPreviewData = {
 export type BlogPreviewProps = {
     id?: number,
     starred?: boolean,
+    published?: string;
     image?: string,
     title?: string,
     description?: string
@@ -41,3 +43,5 @@ export type BlogDataProps = {
     image?: string;
     content?: JSX.Element;
 };
+
+export type PinnedRecentBlogs = { pinned: BlogPreviewData[], recent: BlogPreviewData[] };

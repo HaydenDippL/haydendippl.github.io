@@ -9,6 +9,7 @@ export default function BlogCard(blog_preview: BlogPreviewProps) {
     if (
         blog_preview.id === undefined ||
         blog_preview.starred === undefined ||
+        blog_preview.published === undefined ||
         blog_preview.image === undefined ||
         blog_preview.title === undefined ||
         blog_preview.description === undefined
@@ -28,7 +29,7 @@ export default function BlogCard(blog_preview: BlogPreviewProps) {
         <div className="card bg-base-100 w-80 shadow-xl shrink-0">
             <figure>
                 <img
-                    src={`${import.meta.env.VITE_BACKEND_URL}/${blog_preview.image}`}
+                    src={blog_preview.image}
                     alt={blog_preview.title} />
             </figure>
             <div className="card-body bg-base-200 rounded-b-2xl">

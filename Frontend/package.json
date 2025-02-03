@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "highlight.js": "^11.11.1",
     "luxon": "^3.5.0",
     "react": "^18.3.1",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/luxon": "^3.4.2",
+    "@types/node": "^22.13.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-swc": "^3.5.0",
