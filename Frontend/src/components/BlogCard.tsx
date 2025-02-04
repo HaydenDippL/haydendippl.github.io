@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { useState, useEffect } from "react";
 
 import { BlogPreviewProps } from "../types/BlogTypes";
 
@@ -15,6 +16,21 @@ export default function BlogCard(blog_preview: BlogPreviewProps) {
         blog_preview.description === undefined
     ) return <SkeletonBlogCard />
 
+    const [image_loading, set_image_loading] = useState<boolean>(true);
+    const [image_src, set_image_src] = useState<string>("");
+
+    useEffect(() => {
+        if (blog_preview.image === undefined) return
+
+        const img = new Image();
+        img.src = blog_preview.image;
+        img.onload = () => {
+            if (blog_preview.image)
+                set_image_src(blog_preview.image);
+            set_image_loading(false);
+        };
+    }, [blog_preview.image]);
+
     /// TODO: implement cache / cookies, account for the no_next / no_prev cards and don't display badges for them
     const viewed: Boolean = Math.random() > 0.5;
     const color: string = viewed ? "bg-primary" : "bg-secondary";
@@ -28,9 +44,11 @@ export default function BlogCard(blog_preview: BlogPreviewProps) {
         { display && badge }
         <div className="card bg-base-100 w-80 shadow-xl shrink-0">
             <figure>
-                <img
-                    src={blog_preview.image}
-                    alt={blog_preview.title} />
+                { image_loading && <div className="w-full h-48 skeleton rounded-b-none" /> }
+                { !image_loading && <img
+                    src={image_src}
+                    alt={blog_preview.title}    
+                /> }
             </figure>
             <div className="card-body bg-base-200 rounded-b-2xl">
                 <p className="card-title">{blog_preview.title}</p>
