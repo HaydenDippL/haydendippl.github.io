@@ -1,4 +1,3 @@
-import Carousel from "../components/Carousel";
 import CodeAnimation from "../components/CodeAnimation";
 
 import { useEffect, useState } from "react";
@@ -6,138 +5,9 @@ import { Link } from "react-router";
 
 import profile_photo from "../assets/pfp.jpg";
 
-import { BlogPreviewData, PinnedRecentBlogs } from "../types/BlogTypes";
+import { PinnedRecentBlogs } from "../types/BlogTypes";
 
 import { get_pinned_and_recent } from "../scripts/Blogs";
-
-const dummy_projects: JSX.Element[] = [
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 1</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 2</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 3</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 4</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 5</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 6</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 7</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes!8</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-    <div className="card bg-base-100 image-full w-96 shadow-xl shrink-0">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div className="card-body">
-            <h2 className="card-title">Shoes! 9</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </div>,
-];
 
 export default function Home() {
     return <>
@@ -196,7 +66,8 @@ export default function Home() {
                     <p className="text-xl text-base-content/40 absolute -left-24 bottom-4">also...</p>
                 </div>
             </div>
-            <Carousel items={dummy_projects}/>
+            <p className="text-4xl opacity-50">Coming Soon!</p>
+            {/* <Carousel items={dummy_projects}/> */}
             {/* <button className="btn btn-secondary btn-lg mt-24">Contact Me</button> */}
         </div>
   </>
