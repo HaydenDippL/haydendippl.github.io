@@ -1,4 +1,10 @@
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router";
+import { get_blog_ids } from "../scripts/Blogs";
+
+import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
+import { BLOG_NOT_VIEWED } from "../scripts/BlogStorage";
+
 
 // TODO: add cookies to remember what you've read
 // TODO: use cookies to have a little indicator when there is a new blog/project
@@ -11,6 +17,24 @@ const GITHUB_LINK: string = "https://github.com/HaydenDippL";
 const LINKEDIN_LINK: string = "https://www.linkedin.com/";
 
 export default function Navbar() {
+    const { blog_memory } = useContext(BlogsViewedContext);
+    const [new_blogs, set_new_blogs] = useState<boolean>(new_blog_in_blog_memory());
+
+    useEffect(() => {
+        set_new_blogs(new_blog_in_blog_memory());
+    }, [blog_memory]);
+
+    function new_blog_in_blog_memory(): boolean {
+        const blog_ids = get_blog_ids();
+        const new_blog_found = blog_ids.some(id => {
+            if (id >= blog_memory.length) return true;
+            else return blog_memory[id] == BLOG_NOT_VIEWED;
+        });
+        return new_blog_found;
+    }
+    
+    const blog_badge: JSX.Element = <div className={`absolute z-[999] w-5 h-5 -top-2 -right-2 bg-secondary mask mask-circle`} />
+
     return <div className="">
         <div id="navbar" className="fixed w-full flex flex-row justify-between items-center gap-2 p-4 bg-base-100/90 border-b border-b-black pt-8 z-[9999]">
             <div className="flex flex-row gap-20">
@@ -40,10 +64,11 @@ export default function Navbar() {
                             Home
                         </Link>
                     </button>
-                    <button id="blogs-link" className="btn btn-default">
+                    <button id="blogs-link" className="btn btn-default relative">
                         <Link to="/blogs" className="text-3xl font-semibold">
                             Blogs
                         </Link>
+                        { new_blogs && blog_badge}
                     </button>
                     {/* <button id="projects-link" className="btn btn-default">
                         <Link to="/projects" className="text-3xl font-semibold">

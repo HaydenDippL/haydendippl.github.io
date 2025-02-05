@@ -70,3 +70,7 @@ export function get_pinned_and_recent(): PinnedRecentBlogs {
         recent: recent
     };
 }
+
+export function get_blog_ids(): number[] {
+    return blogs.map((blog) => blog.id);
+}

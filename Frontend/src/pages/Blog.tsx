@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Link, useParams } from "react-router";
 
 import { DateTime } from "luxon";
@@ -11,6 +11,8 @@ import { BlogData, BlogDataProps } from "../types/BlogTypes";
 import dinosaur_image from "../assets/dino-scene.png";
 import coming_soon_image from "../assets/coming-soon.png"
 import SkeletonText, { SkeletonTextProps } from "../components/SkeletonText";
+import { blog_is_viewed, set_blogs } from "../scripts/BlogStorage";
+import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
 
 const coming_soon: JSX.Element = <BlogCard
     id={-2}
@@ -76,7 +78,24 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
         blog.content === undefined
     ) return <BlogSkeleton />
 
-    const viewed: Boolean = true; // FIXME: modify for testing purposes
+    const { blog_memory, set_blog_memory } = useContext(BlogsViewedContext);
+    const [new_blog, set_new_blog] = useState<boolean>(false);
+
+    useEffect(() => {
+        const blog_is_new: boolean = !blog_is_viewed(blog_memory, blog.id as number);
+        console.log(blog_is_new);
+        set_new_blog(blog_is_new);
+        if (blog_is_new) {
+            const new_blog_memory: string = set_blogs(blog_memory, blog.id as number, true);
+            set_blog_memory(new_blog_memory);
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log("new_blog:", new_blog)
+    }, [new_blog])
+
+    const viewed: Boolean = !new_blog;
     const color: string = viewed ? "bg-primary" : "bg-secondary";
     const mask: string = blog.starred ? "mask mask-star-2" : "mask mask-circle";
     const display: boolean = !viewed || blog.starred;
@@ -96,6 +115,7 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
             <div id="dates" className="mt-6 mb-16">
                 <p id="date-created" className="text-xl mt-6">Published: { date_published }</p>
                 { display_modified_date && <p id="date-edited" className="text-xl">Edited: { date_modified }</p> }
+                <p>{ (new_blog) ? "new blog" : "not new blog"}</p>
             </div>
             <div className="prose prose-lg">
                 { blog.content }

@@ -1,6 +1,6 @@
 import CodeAnimation from "../components/CodeAnimation";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router";
 
 import profile_photo from "../assets/pfp.jpg";
@@ -8,6 +8,8 @@ import profile_photo from "../assets/pfp.jpg";
 import { PinnedRecentBlogs } from "../types/BlogTypes";
 
 import { get_pinned_and_recent } from "../scripts/Blogs";
+import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
+import { blog_is_viewed } from "../scripts/BlogStorage";
 
 export default function Home() {
     return <>
@@ -17,7 +19,6 @@ export default function Home() {
                     <p className="font-semibold text-5xl tracking-tight">Hi, my name is <span className="text-primary">Hayden Dippel</span></p>
                     <p className="font-semibold text-2xl text-opacity-60 text-base-content/40 leading-9 mt-6">I am a soon to be graduate from the University of <span className="font-extrabold" style={{color: "#A92A38"}}>Wisconsin</span>-Madison</p>
                 </div>
-                {/* TODO: change to image */}
                 <div id="Picture" className="relative pb-12">
                     <img className="w-80 h-80 mask mask-circle" src={profile_photo} />
                     <img
@@ -112,13 +113,15 @@ function BlogLink({ id, title, starred }: { id?: number, title?: string, starred
     if (id === undefined || title === undefined || starred === undefined)
         return <div className="rounded-lg bg-black bg-opacity-20 h-16 skeleton" /> 
 
+    const { blog_memory } = useContext(BlogsViewedContext);
+
     // TODO: cut off text after a certain length
-    const viewed: boolean = true; // FIXME: function call
-    const color: string = viewed ? "bg-primary" : "bg-secondary";
+    const new_blog: boolean = blog_is_viewed(blog_memory, id);
+    const color: string = new_blog ? "bg-primary" : "bg-secondary";
     const mask: string = starred ? "mask mask-star-2 " : "mask mask-circle";
     const placement: string = starred ? "-top-3.5 -right-3.5" : "-top-2 -right-2";
     const size: string = starred ? "w-8 h-8" : "w-5 h-5"
-    const display: boolean = !viewed || starred;
+    const display: boolean = new_blog || starred;
     const badge: JSX.Element = <div className={`absolute z-[999] ${size} ${placement} ${color} ${mask}`} />;
 
     return <Link to={`/blog/${id}`} className="transform transition-transform duration-300 hover:scale-110">
