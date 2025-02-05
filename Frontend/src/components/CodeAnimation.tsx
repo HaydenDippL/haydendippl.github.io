@@ -1,5 +1,3 @@
-// TODO: use Highlight js and create the editor...
-
 import { useEffect, useState } from "react";
 
 import hljs from "highlight.js/lib/core"

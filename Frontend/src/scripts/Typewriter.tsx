@@ -115,17 +115,13 @@ export default class Typewriter {
                 const instruction: TypewriteInstruction = this.instructions[this.i];
                 switch (instruction[0]) {
                     case "write":
-                        console.log(this.i, Date.now());
                         await this.write_text(instruction[1]);
                         break;
                     case "delete":
-                        console.log(this.i, Date.now());
                         await this.delete_text(instruction[1]);
                         break;
                     case "delete-lines":
-                        console.log(this.i, Date.now());
                         await this.delete_lines(instruction[1]);
-                        console.log("completed");
                         break;
                     case "sleep":
                         if (!this.debug) await this.sleep(instruction[1]);
@@ -209,8 +205,6 @@ export default class Typewriter {
         const base: string = await this.get_current_text();
         let i: number = get_index(row, col, base);
 
-        console.log("base", i, base);
-
         if (instant) {
             this.set_text(write_text_in_base(i, text, base));
         } else {
@@ -233,7 +227,6 @@ export default class Typewriter {
      */
     private write_text_helper({i, t, speed_ms, text, base}: WriteHelperArgs): Promise<void> {
         return new Promise<void>((resolve) => {
-            if (t === 0) console.log("write_text_helper", base)
             const start_ms: number = Date.now();
 
             const new_text: string = write_text_in_base(i, text[t], base);
@@ -282,7 +275,6 @@ export default class Typewriter {
         let base: string = await this.get_current_text();
         let i: number = get_index(row, col, base);
 
-        // TODO: reverse support
         if (instant) {
             const new_text: string | number = delete_text_from_base(i, num_deletions, base, reverse);
             if (new_text == -1) console.error("ERROR: cursor index i is less than 0");

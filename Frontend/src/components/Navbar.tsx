@@ -6,8 +6,6 @@ import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
 import { BLOG_NOT_VIEWED } from "../scripts/BlogStorage";
 
 
-// TODO: add cookies to remember what you've read
-// TODO: use cookies to have a little indicator when there is a new blog/project
 // TODO: add control + K to search bar and icons in the search bar itself it indicate this
 
 // TODO: add youtube link
