@@ -47,8 +47,8 @@ export default function Blog() {
         return <BlogNotFound />
     
     return <div className="flex flex-col justify-center items-center w-full">
-        <div className="flex flex-col w-1/2 items-start">
-            <BlogContent {...blog} />
+        <div className="flex flex-col w-fill items-center">
+                <BlogContent {...blog} />
         </div>
         <div id="post-blog" className="flex flex-col w-7/12 ml-[-5%] mt-10 items-center gap-1">
             <div className="divider w-[110%]" />
@@ -91,10 +91,6 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
         }
     }, []);
 
-    useEffect(() => {
-        console.log("new_blog:", new_blog)
-    }, [new_blog])
-
     const viewed: Boolean = !new_blog;
     const color: string = viewed ? "bg-primary" : "bg-secondary";
     const mask: string = blog.starred ? "mask mask-star-2" : "mask mask-circle";
@@ -104,9 +100,9 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
     const date_modified: string = DateTime.fromISO(blog.modified).toFormat("t ZZZZ, LLL d, y");
     const display_modified_date: boolean = blog.created !== blog.modified;
 
-    return <>
+    return <div className="flex flex-col w-[90%] md:w-[80%] xl:[50%] items-start">
         <div id="feature-image" className="relative">
-            <img src={blog.image} className="rounded-xl relative" />
+            <img src={blog.image} className="rounded-xl" />
             { display && badge_element }
         </div>
         <div className="px-2">
@@ -115,13 +111,12 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
             <div id="dates" className="mt-6 mb-16">
                 <p id="date-created" className="text-xl mt-6">Published: { date_published }</p>
                 { display_modified_date && <p id="date-edited" className="text-xl">Edited: { date_modified }</p> }
-                <p>{ (new_blog) ? "new blog" : "not new blog"}</p>
             </div>
-            <div className="prose prose-lg">
+            <div className="prose prose-md md:prose-lg xl:prose-xl">
                 { blog.content }
             </div>
         </div>
-    </>
+    </div>
 }
 
 function BlogSkeleton(): JSX.Element {
