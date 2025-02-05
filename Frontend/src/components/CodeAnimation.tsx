@@ -24,15 +24,15 @@ export default function CodeAnimation() {
     }, []);
 
 
-    return <div className="mockup-code w-[48rem]">
+    return <div className="mockup-code w-full text-xs md:w-[48rem] md:text-md">
         <FormatCode code={code} language="python" cursor={{ row: 11, col: 3 }} />
     </div>
 }
 
 function FormatCode({ code, language, cursor }: { code: string; language: string; cursor?: Cursor }): JSX.Element {
     const highlighted_code: string[] = hljs.highlight(code, { language: language }).value.split("\n");
-    const min_lines: number = 0;
-    for (let i = highlighted_code.length; i < min_lines; ++i) highlighted_code.push("");
+    const min_lines: number = 25;
+    const needed_lines: number = Math.max(0, min_lines - highlighted_code.length);
 
     return <>
         {/* {
@@ -44,8 +44,10 @@ function FormatCode({ code, language, cursor }: { code: string; language: string
         } */}
 
         {
-            highlighted_code.map((code, i) => {
-                return <pre key={i} data-prefix={i + 1}>
+            highlighted_code.concat(Array(needed_lines).fill("")).map((code, i) => {
+                const line_number: string = (i >= highlighted_code.length) ? "" : String(i + 1);
+
+                return <pre key={i} data-prefix={line_number}>
                     <code dangerouslySetInnerHTML={{ __html: code }} />
                 </pre>
             })

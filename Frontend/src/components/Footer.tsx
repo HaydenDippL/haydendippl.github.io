@@ -9,7 +9,7 @@ const GITHUB_LINK: string = "https://github.com/HaydenDippL";
 const LINKEDIN_LINK: string = "https://www.linkedin.com/";
 
 export default function Footer() {
-    return <div id="footer" className="w-full h-80 bg-neutral flex  flex-row justify-between py-16 px-12">
+    return <div id="footer" className="w-full bg-neutral flex flex-col justify-between py-16 px-12 gap-16 md:flex-row md:gap-4">
         <div id="links" className="flex flex-row gap-6 text-2xl font-semibold">
             <div id="nav-links" className="flex flex-col gap-2">
                 <p className="font-bold mb-3">Nav</p>
@@ -24,8 +24,8 @@ export default function Footer() {
                 <a id="LinkedIn" href={LINKEDIN_LINK} target="_blank" className="underline text-primary">LinkedIn</a>
             </div>
         </div>
-        <div id="credits" className="flex flex-col text-2xl font-semibold">
-            <div id="DaisyUI" className="flex flex-row justify-end items-center gap-3">
+        <div id="credits" className="flex flex-col text-2xl font-semibold -ml-6">
+            <div id="DaisyUI" className="flex flex-row-reverse justify-end items-center gap-3 md:flex-row">
                 <p>Made with <a className="underline" href="https://daisyui.com/" target="_blank">DaisyUI</a></p>
                 <a href="https://daisyui.com/" target="_blank">
                     <img
@@ -34,7 +34,7 @@ export default function Footer() {
                     />
                 </a>
             </div>
-            <div id="DigitalOcean" className="flex flex-row justify-end items-center gap-3">
+            <div id="DigitalOcean" className="flex flex-row-reverse justify-end items-center gap-3 md:flex-row">
                 <p>Powered by <a className="underline" href="https://www.digitalocean.com/" target="_blank">DigitalOcean</a></p>
                 <a href="https://www.digitalocean.com/" target="_blank">
                     <img
@@ -43,7 +43,7 @@ export default function Footer() {
                     />
                 </a>
             </div>
-            <div className="flex flex-row justify-end items-center gap-3">
+            <div className="flex flex-row-reverse justify-end items-center gap-3 md:flex-row">
                 <p>Designed and Created by Hayden Dippel</p>
                 <img className="h-14 w-14 mask mask-circle mx-3.5" src={profile_photo} />
             </div>

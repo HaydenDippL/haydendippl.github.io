@@ -14,7 +14,7 @@ import { blog_is_viewed } from "../scripts/BlogStorage";
 export default function Home() {
     return <>
         <div className="flex flex-col items-center">
-            <div className="flex flex-row gap-48">
+            <div className="flex flex-col md:flex-row gap-16 md:gap-24 lg:gap-48">
                 <div id="Hello" className="w-80 mt-12">
                     <p className="font-semibold text-5xl tracking-tight">Hi, my name is <span className="text-primary">Hayden Dippel</span></p>
                     <p className="font-semibold text-2xl text-opacity-60 text-base-content/40 leading-9 mt-6">I am a soon to be graduate from the University of <span className="font-extrabold" style={{color: "#A92A38"}}>Wisconsin</span>-Madison</p>
@@ -28,8 +28,8 @@ export default function Home() {
                     />
                 </div>
             </div>
-            <div className="flex flex-row gap-24 justify-center items-start mt-32">
-                <div className="w-9/12">
+            <div className="flex flex-col xl:flex-row gap-24 justify-center items-center xl:items-start mt-32">
+                <div className="w-full xl:w-9/12">
                     <CodeAnimation />
                 </div>
                 <div className="flex flex-col gap-12">
@@ -52,7 +52,7 @@ export default function Home() {
             <div className="justify-center items-center mt-48 w-10/12">
                 <div className="divider"></div>
             </div>
-            <div className="flex flex-row gap-48 mt-12">
+            <div className="flex flex-col items-center gap-24 lg:flex-row lg:items-start xl:gap-48 mt-12">
                 <div id="blogs" className="w-80 mt-12">
                     <p className="font-semibold text-5xl tracking-tight">Keep up with my <span className="text-info">blogs</span></p>
                     <p className="font-semibold text-2xl text-opacity-60 text-base-content/40 leading-9 mt-6">I write blogs about new technologies, personal experience, and projects...</p>
@@ -62,9 +62,10 @@ export default function Home() {
                 <BlogList />
             </div>
             <div id="projects">
-                <div className="relative mt-36 mb-16">
+                <div className="relative mt-36 mb-16 text-center">
+                    <p className="text-xl text-base-content/40 mb-12 block xl:hidden">also...</p>
                     <p className="text-8xl">Check Out My Projects</p>
-                    <p className="text-xl text-base-content/40 absolute -left-24 bottom-4">also...</p>
+                    <p className="text-xl text-base-content/40 absolute -left-24 bottom-4 hidden xl:block">also...</p>
                 </div>
             </div>
             <p className="text-4xl opacity-50">Coming Soon!</p>
