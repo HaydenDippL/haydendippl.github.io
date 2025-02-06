@@ -11,18 +11,33 @@
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+
+from ..models.analytics import User, Session
 
 # TODO: log new session
 @api_view(["POST"])
-def log_session(request):
+def log_user_session(request):
     """
-    Log the session of a user
+    Log the session of a user. If a client does not specify user_id, it creates a new
+    user. If the client specifies a user_id that does not exist, it creates a new user.
+    Returns 200 OK response with the session-id and user-id.
+
+    Body:
+    - user_id: uuid of user
 
     200 OK
-    400 BAD REQUEST
-        - Request doesn't contain exactly id, created_at, and or ip
     """
-    pass
+    user_id = request.data.get("user_id")
+    
+    try:
+        user = User.objects.get(user_id=user_id)
+    except User.DoesNotExist:
+        user = User.objects.create()
+    
+    session = Session.objects.create(user=user)
+
+    return Response({ "session-id": session.session_id, "user-id": session.user.user_id }, status=200)
 
 # TODO: log which page you are on
 @api_view(["POST"])

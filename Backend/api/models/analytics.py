@@ -1,11 +1,17 @@
 from django.db import models
 
-class Session(models.Model):
-    id = models.CharField(max_length=255, primary_key=True, editable=False, db_comment="Frontend JS session id")
-    created_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="Start time of the session")
-    ip = models.GenericIPAddressField(editable=False, db_comment="The IP address using this session")
+import uuid
 
-class PageAnalytics(models.Model):
+class User(models.Model):
+    user_id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False, unique=True, db_comment="UUID to track a user in the cookies/local storage")
+    created_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="Start time of the session")
+
+class Session(models.Model):
+    session_id = models.AutoField(primary_key=True, null=False, editable=False, db_comment="Session id int created by backend and given to frontend")
+    created_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="Start time of the session")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, editable=False, db_comment="id of the user")
+
+class PageAnalytic(models.Model):
     PAGE_CHOICES = {
         0: "unknown",
         1: "home",
@@ -45,7 +51,7 @@ class ReferredFrom(models.Model):
     taken_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="The date and time that the user was referred to the website")
 
 
-class ArticleAnalytics(models.Model):
+class ArticleAnalytic(models.Model):
     ARTICLE_CHOICES = {
         0: "unknown",
         1: "blog",
