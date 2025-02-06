@@ -33,8 +33,9 @@ class LinksTaken(models.Model):
         2: "YouTube",
         3: "GitHub"
     }
+    LINK_CHOICES_REVERSE = { v: k for k, v in LINK_CHOICES.items() }
 
-    session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False, null=True)
     link = models.PositiveSmallIntegerField(choices=LINK_CHOICES, default=0, editable=False, db_comment="The link taken ['LinkedIn', 'YouTube', 'GitHub']")
     taken_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="The date and time that the link was taken")
 
