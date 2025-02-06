@@ -10,7 +10,10 @@ class PageAnalytics(models.Model):
         0: "unknown",
         1: "home",
         2: "blogs",
-        3: "projects"
+        3: "projects",
+        4: "blog",
+        5: "projects",
+        6: "analytics"
     }
 
     session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False)
@@ -29,6 +32,19 @@ class LinksTaken(models.Model):
     link = models.PositiveSmallIntegerField(choices=LINK_CHOICES, default=0, editable=False, db_comment="The link taken ['LinkedIn', 'YouTube', 'GitHub']")
     taken_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="The date and time that the link was taken")
 
+class ReferredFrom(models.Model):
+    LINK_CHOICES = {
+        0: "unknown",
+        1: "LinkedIn",
+        2: "YouTube",
+        3: "GitHub"
+    }
+
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False)
+    link = models.PositiveSmallIntegerField(choices=LINK_CHOICES, default=0, editable=False, db_comment="The link taken ['LinkedIn', 'YouTube', 'GitHub']")
+    taken_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="The date and time that the user was referred to the website")
+
+
 class ArticleAnalytics(models.Model):
     ARTICLE_CHOICES = {
         0: "unknown",
@@ -37,6 +53,6 @@ class ArticleAnalytics(models.Model):
     }
 
     session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False)
-    article = models.PositiveSmallIntegerField(choices=ARTICLE_CHOICES, default=0, editable=False, db_comment="The link taken ['LinkedIn', 'YouTube', 'GitHub']")
+    article_type = models.PositiveSmallIntegerField(choices=ARTICLE_CHOICES, default=0, editable=False, db_comment="The link taken ['unknown', 'blog', 'project']")
     article_id = models.PositiveSmallIntegerField(editable=False, db_default=-1, db_comment="The id of the article")
-    taken_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="The date and time that the link was taken")
+    viewed_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="The date and time that the link was taken")
