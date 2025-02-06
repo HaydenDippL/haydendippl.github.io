@@ -13,7 +13,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
-from ..models.analytics import User, Session
+from ..models.analytics import User, Session, PageAnalytic
 
 # TODO: log new session
 @api_view(["POST"])
@@ -47,11 +47,41 @@ def log_page(request):
 
     200 OK
     400 BAD REQUEST
-        - Request doesn't contain exactly session, page, viewed_at
-    404 NOT FOUND 
-        - Session not fonud
+        - Request doesn't contain session, page, viewed_at
+        - Request doesn't contain valid page in PAGE_CHOICE (Ex: \"home\")
+        - Request isn't in a valid session
+        - Request isn't from a valid user or user-id doesn't match session's user-id
     """
-    pass
+
+    user_id = request.data.get("user-id")
+    session_id = request.data.get("session-id")
+    page = request.data.get("page")
+
+    if not all([user_id, session_id, page]):
+        return Response({ "error": "Must specify valid user-id, session-id, and page" }, status=400)
+    
+    if not isinstance(page, str) or page.lower() not in PageAnalytic.PAGE_CHOICES_REVERSE:
+        return Response({ "error": f"Must be a valid page [string] - {PageAnalytic.PAGE_CHOICES.values()}" }, status=400)
+    
+    page_choice = PageAnalytic.PAGE_CHOICES_REVERSE[page]
+
+    session = None
+    try:
+        session = Session.objects.get(session_id=session_id)
+    except Session.DoesNotExist:
+        return Response({ "error": "Must be in a valid user-session" }, status=400)
+    
+    print(session.user.user_id)
+    print(user_id)
+    if str(session.user.user_id) != str(user_id):
+        return Response({ "error": "Must be in a valid user-session" }, status=400)
+    
+    try:
+        PageAnalytic.objects.create(session=session, page=page_choice)
+    except:
+        return Response({ "error": "Error processing request" }, status=500)
+    
+    return Response(status=200)
 
 # TODO: log which link is taken
 @api_view(["POST"])

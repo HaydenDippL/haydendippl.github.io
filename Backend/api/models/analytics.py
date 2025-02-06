@@ -7,13 +7,12 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="Start time of the session")
 
 class Session(models.Model):
-    session_id = models.AutoField(primary_key=True, null=False, editable=False, db_comment="Session id int created by backend and given to frontend")
+    session_id = models.AutoField(primary_key=True, unique=True, null=False, editable=False, db_comment="Session id int created by backend and given to frontend")
     created_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="Start time of the session")
     user = models.ForeignKey(User, on_delete=models.CASCADE, editable=False, db_comment="id of the user")
 
 class PageAnalytic(models.Model):
     PAGE_CHOICES = {
-        0: "unknown",
         1: "home",
         2: "blogs",
         3: "projects",
@@ -21,6 +20,7 @@ class PageAnalytic(models.Model):
         5: "projects",
         6: "analytics"
     }
+    PAGE_CHOICES_REVERSE = { v: k for k, v in PAGE_CHOICES.items() }
 
     session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False)
     page = models.PositiveSmallIntegerField(choices=PAGE_CHOICES, default=0, editable=False, db_comment="The page viewed ['home', 'blogs', 'projects']")
