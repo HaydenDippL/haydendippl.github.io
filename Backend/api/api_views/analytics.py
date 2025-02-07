@@ -12,7 +12,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from ..models.analytics import User, Session, PageAnalytic, LinksTaken, ReferredFrom
+from ..models.analytics import User, Session, PageAnalytic, LinksTaken, ReferredFrom,  ArticleAnalytic
 
 @api_view(["POST"])
 def log_user_session(request):
@@ -173,7 +173,33 @@ def log_article(request):
     404 NOT FOUND
         - Session not found
     """
-    pass
+    user_id = request.data.get("user-id")
+    session_id = request.data.get("session-id")
+    article_type = request.data.get("article_type")
+    article_id = request.data.get("article_id")
+
+    if not all([article_type, article_id]):
+        return Response({ "error": "Must specify valid article type and article id" }, status=400)
+    
+    if not isinstance(article_type, str) or article_type not in ArticleAnalytic.ARTICLE_CHOICES.values():
+        return Response({ "error": f"Must be a valid article type [string] - {ArticleAnalytic.ARTICLE_CHOICES.values()}" }, status=400)
+    
+    article_type_choice = ArticleAnalytic.ARTICLE_CHOICES_REVERSE[article_type]
+
+    session = None
+    try:
+        session = Session.objects.get(session_id=session_id)
+        if str(session.user.user_id) != str(user_id):
+            session = None
+    except:
+        session = None
+    
+    try:
+        ArticleAnalytic.objects.create(session=session, article_type=article_type_choice)
+    except:
+        return Response({ "error": "Error processing request" }, status=500)
+    
+    return Response(status=201 if session == None else 200)
 
 # TODO: get total sessions
 @api_view(["GET"])

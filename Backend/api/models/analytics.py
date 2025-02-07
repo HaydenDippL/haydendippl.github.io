@@ -53,10 +53,10 @@ class ReferredFrom(models.Model):
 
 class ArticleAnalytic(models.Model):
     ARTICLE_CHOICES = {
-        0: "unknown",
         1: "blog",
         2: "project"
     }
+    ARTICLE_CHOICES_REVERSE = { v: k for k, v in ARTICLE_CHOICES.items() }
 
     session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False)
     article_type = models.PositiveSmallIntegerField(choices=ARTICLE_CHOICES, default=0, editable=False, db_comment="The link taken ['unknown', 'blog', 'project']")
