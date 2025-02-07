@@ -12,7 +12,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from ..models.analytics import User, Session, PageAnalytic, LinksTaken
+from ..models.analytics import User, Session, PageAnalytic, LinksTaken, ReferredFrom
 
 @api_view(["POST"])
 def log_user_session(request):
@@ -112,7 +112,7 @@ def log_external_link(request):
         if str(session.user.user_id) != str(user_id):
             session = None
     except:
-        pass
+        Session = None
     
     try:
         LinksTaken.objects.create(session=session, link=external_link_choice)
@@ -134,7 +134,32 @@ def log_referral_link(request):
     404 NOT FOUND
         - Session not found
     """
-    pass
+    user_id = request.data.get("user-id")
+    session_id = request.data.get("session-id")
+    referral_link = request.data.get("link")
+
+    if not all([referral_link]):
+        return Response({ "error": "Must specify valid link" }, status=400)
+    
+    if not isinstance(referral_link, str) or referral_link not in ReferredFrom.LINK_CHOICES.values():
+        return Response({ "error": f"Must be a valid external link [string] - {ReferredFrom.LINK_CHOICES.values()}" }, status=400)
+    
+    referral_link_choice = ReferredFrom.LINK_CHOICES_REVERSE[referral_link]
+
+    session = None
+    try:
+        session = Session.objects.get(session_id=session_id)
+        if str(session.user.user_id) != str(user_id):
+            session = None
+    except:
+        session = None
+    
+    try:
+        ReferredFrom.objects.create(session=session, link=referral_link_choice)
+    except:
+        return Response({ "error": "Error processing request" }, status=500)
+    
+    return Response(status=201 if session == None else 200)
 
 # TODO: log which blog / project you're viewing
 @api_view(["POST"])

@@ -28,7 +28,6 @@ class PageAnalytic(models.Model):
 
 class LinksTaken(models.Model):
     LINK_CHOICES = {
-        0: "unknown",
         1: "LinkedIn",
         2: "YouTube",
         3: "GitHub"
@@ -41,14 +40,14 @@ class LinksTaken(models.Model):
 
 class ReferredFrom(models.Model):
     LINK_CHOICES = {
-        0: "unknown",
         1: "LinkedIn",
         2: "YouTube",
         3: "GitHub"
     }
+    LINK_CHOICES_REVERSE = { v: k for k, v in LINK_CHOICES.items() }
 
     session = models.ForeignKey(Session, on_delete=models.CASCADE, editable=False)
-    link = models.PositiveSmallIntegerField(choices=LINK_CHOICES, default=0, editable=False, db_comment="The link taken ['LinkedIn', 'YouTube', 'GitHub']")
+    link = models.PositiveSmallIntegerField(choices=LINK_CHOICES, default=0, editable=False, db_comment="The link referred from ['LinkedIn', 'YouTube', 'GitHub']")
     taken_at = models.DateTimeField(auto_now_add=True, editable=False, db_comment="The date and time that the user was referred to the website")
 
 
