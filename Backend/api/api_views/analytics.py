@@ -11,11 +11,9 @@
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
 
 from ..models.analytics import User, Session, PageAnalytic, LinksTaken
 
-# TODO: log new session
 @api_view(["POST"])
 def log_user_session(request):
     """
@@ -39,7 +37,6 @@ def log_user_session(request):
 
     return Response({ "session-id": session.session_id, "user-id": session.user.user_id }, status=200)
 
-# TODO: log which page you are on
 @api_view(["POST"])
 def log_page(request):
     """
@@ -82,7 +79,6 @@ def log_page(request):
     
     return Response(status=200)
 
-# TODO: log which link is taken
 @api_view(["POST"])
 def log_external_link(request):
     """
