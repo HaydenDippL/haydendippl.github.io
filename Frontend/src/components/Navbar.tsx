@@ -35,7 +35,7 @@ export default function Navbar() {
 
     return <div className="">
         <div id="navbar" className="fixed w-full flex flex-row justify-between items-center gap-2 p-4 bg-base-100/90 border-b border-b-black pt-8 z-[9999]">
-            <div className="flex flex-row gap-20">
+            <div className="flex flex-row gap-20 hidden md:block">
                 <Link to="/" className="text-4xl font-semibold">
                     HaydenDippL
                 </Link>
@@ -55,8 +55,8 @@ export default function Navbar() {
                     </svg>
                 </label> */}
             </div>
-            <div className="flex flex-row gap-24">
-                <div id="nav-links" className="flex flex-row gap-8">
+            <div className="flex flex-row gap-24 justify-center w-full md:w-auto">
+                <div id="nav-links" className="flex flex-row gap-8 items-center">
                     <button id="home-link" className="btn btn-default">
                         <Link to="/" className="text-3xl font-semibold">
                             Home
@@ -74,7 +74,7 @@ export default function Navbar() {
                         </Link>
                     </button> */}
                 </div>
-                <div id="social-links" className="flex flex-row gap-2">
+                <div id="social-links" className="flex flex-row gap-2 hidden md:inline-flex">
                     {/* <div id="YouTube" className="opacity-10 cursor-pointer" onClick={() => window.open(YOUTUBE_LINK)}>
                         <svg viewBox="0 0 50 50" width="50px" height="50px">
                             <path
