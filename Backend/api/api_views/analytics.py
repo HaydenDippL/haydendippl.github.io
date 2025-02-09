@@ -95,7 +95,7 @@ def create_session(request):
     user_id = request.data.get("user-id")
 
     # check that user-id was specified or return 400 BAD REQUEST
-    if not all([user_id]):
+    if not all(var is not None for var in [user_id]):
         return Response({ "error": "Must specify valid user-id in body" }, status=400)
     
     # get user or return 403 FORBIDDEN
@@ -141,7 +141,7 @@ def log_page(request):
     page = request.data.get("page")
 
     # check that session_id and page specified in body or 400 BAD REQUEST
-    if not all([session_id, page]):
+    if not all(var is not None for var in [session_id, page]):
         return Response({ "error": "Must specify valid session-id and page" }, status=400)
     
     # check that page is a valid page or 400 BAD REQUEST
@@ -187,7 +187,7 @@ def log_referring_to(request):
     link = request.data.get("link")
 
     # check that session_id and link specified in body or 400 BAD REQUEST
-    if not all([link]):
+    if not all(var is not None for var in [link]):
         return Response({ "error": "Must specify valid link" }, status=400)
     
     # check that link is a valid link or 400 BAD REQUEST
@@ -233,7 +233,7 @@ def log_referral_from(request):
     link = request.data.get("link")
 
     # check that session_id and page specified in body or 400 BAD REQUEST
-    if not all([link]):
+    if not all(var is not None for var in [link]):
         return Response({ "error": "Must specify valid link" }, status=400)
     
     # check that link is a valid page or 400 BAD REQUEST
@@ -281,8 +281,11 @@ def log_article(request):
     article_type = request.data.get("article-type")
     article_id = request.data.get("article-id")
 
+    print(article_type, article_id)
+    print(type(article_type), type(article_id))
+
     # check that session_id and page specified in body or 400 BAD REQUEST
-    if not all([article_type, article_id]):
+    if not all(var is not None for var in [article_type, article_id]):
         return Response({ "error": "Must specify valid article type and article id" }, status=400)
     
     # check that article_type is a valid article_type or 400 BAD REQUEST

@@ -39,7 +39,9 @@ function get_user_id_from_storage(): string | null {
  * @returns user id from the backend
  */
 async function get_user_id_from_backend(): Promise<string | null> {
-    const resp = await fetch(`${process.env.BACKEND_URL}/user`, { method: 'POST' });
+    const url: string = `${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_CREATE_USER_PATH}`;
+    const headers = { "Content-Type": "application/json" };
+    const resp = await fetch(url, { method: 'POST', headers: headers });
     const data = await resp.json();
 
     if (resp.status === 500) {
@@ -70,7 +72,7 @@ async function get_user_id_from_backend(): Promise<string | null> {
  */
 function set_user_UUID(uuid: string): boolean {
     try {
-        sessionStorage.setItem(USER_ID_KEY, uuid);
+        localStorage.setItem(USER_ID_KEY, uuid);
         return true;
     } catch (error) {
         console.error(`Could not set ${USER_ID_KEY} in local storage`);
@@ -91,7 +93,15 @@ export async function get_session(): Promise<string | null> {
 
     if (!session_id) {
         if (!user_id) {
-            await get_user_id_from_backend();
+            user_id = await get_user_id_from_backend();
+            if (user_id === null) {
+                console.error("Could not get user-id");
+                return null;
+            }
+            if (!set_user_UUID(user_id)) {
+                console.error("Could not set user-id");
+                return null;
+            }
             session_id = get_session_id_from_storage();
         } else {
             session_id = await get_session_UUID_from_backend(user_id);
@@ -125,7 +135,10 @@ function get_session_id_from_storage(): string | null {
  * @returns session id from the backend
  */
 async function get_session_UUID_from_backend(user_id: string): Promise<string | null> {
-    const resp = await fetch(`${process.env.BACKEND_URL}/session`, { method: "POST", body: JSON.stringify({ "user-id": user_id }) });
+    const url: string = `${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_CREATE_SESSION_PATH}`;
+    const headers = { "Content-Type": "application/json" };
+    const body: string = JSON.stringify({ "user-id": user_id });
+    const resp = await fetch(url, { method: "POST", body: body, headers: headers });
     const data = await resp.json();
 
     if (resp.status === 500) {

@@ -13,23 +13,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         // get the part of the URL after the domain name "http://HaydenDippL.io/..."
-        const PAGE_INDEX_IN_PATH = 3;
-        const ARTICLE_ID_INDEX_IN_PATH = 4;
-        const path: string[] = current_url.split("/").slice(PAGE_INDEX_IN_PATH);
-        const page: string = (path[0] || "").toLowerCase();
-        let article_id: number | null;
+        const path: string = current_url.slice(1); // remove the first '/' in url; EX: '/home' -> 'home'
+        const split_path: string[] = path.split("/");
+        const page: string = split_path[0] || "";
+        const article_id: number | null = parse_number(split_path[1] || "NaN");
 
         switch (page) {
             // Referral Links
-            case "linkedin":
+            case "LinkedIn":
                 log_referral_from("LinkedIn");
                 navigate("/");
                 break;
-            case "youtube":
+            case "YouTube":
                 log_referral_from("YouTube");
                 navigate("/");
                 break;
-            case "github":
+            case "GitHub":
                 log_referral_from("GitHub");
                 navigate("/");
                 break;
@@ -52,14 +51,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             // Articles and Pages
             case "blog":
                 log_page("blog");
-                article_id = parse_number(path[ARTICLE_ID_INDEX_IN_PATH]);
                 if (article_id !== null) {
                     log_article(article_id, "blog");
                 }
                 break;
             case "project":
                 log_page("project");
-                article_id = parse_number(path[ARTICLE_ID_INDEX_IN_PATH]);
                 if (article_id !== null) {
                     log_article(article_id, "project");
                 }
