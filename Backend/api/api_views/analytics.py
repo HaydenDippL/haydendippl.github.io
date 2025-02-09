@@ -46,10 +46,11 @@ def get_session_or_ERROR_Response(session_id):
 @api_view(["POST"])
 def create_user(request):
     """
-    Create a new user for the client and send back the user-id
+    Create a new user for the client and send back the user-id and session-id
 
     200 OK returns {
         "user-id": <user-id>
+        "session-id": <session-id>
     }
     500 INTERNAL SERVER ERROR
         - Error creating user
@@ -61,9 +62,16 @@ def create_user(request):
         user = User.objects.create()
     except:
         return Response({ "error": "internal server error" }, status=500)
+    
+    session = None
+    try:
+        session = Session.objects.create(user=user)
+    except:
+        return Response({ "error": "internal server error" }, status=500)
+
 
     # return user-id 200 OK
-    return Response({ "user-id": user.user_id }, status=200)
+    return Response({ "user-id": user.user_id, "session-id": session.session_id }, status=200)
 
 @api_view(["POST"])
 def create_session(request):
