@@ -32,27 +32,27 @@ export default function Home() {
                 <div className="w-full xl:w-9/12">
                     <CodeAnimation />
                 </div>
-                <div className="flex flex-col gap-12">
-                    <div id="Junior" className="w-96">
-                        <p className="font-semibold text-5xl tracking-tight">Experience the <span style={{
-                            background: "linear-gradient(to right, #308AFF, #FF308A)",
-                            WebkitBackgroundClip: "text",
-                            backgroundClip: "text",
-                            WebkitTextFillColor: "transparent"
-                        }}>junior experience</span></p>
-                        <p className="font-semibold text-2xl tracking-tight mt-6 azeret-mono">journey &gt;&gt; dest</p>
-                        <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6">I want to be able to share my experience breaking into the software development industry...</p>
-                    </div>
-                    <div id="Community" className="mt-24">
-                        <p className="font-semibold text-5xl tracking-tight w-auto">Learning <span style={{ color: "#FF308A" }}>Community</span></p>
-                        <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6 w-96">I will create a community that can to learn from me <span className="text-primary text-opacity-100">&&</span> each other</p>
-                    </div>
+                <div className="flex flex-col">
+                    <div className="flex flex-col justify-center w-64 md:w-96">
+                            <p className="font-semibold text-5xl tracking-tight">Experience the <span style={{
+                                background: "linear-gradient(to right, #308AFF, #FF308A)",
+                                WebkitBackgroundClip: "text",
+                                backgroundClip: "text",
+                                WebkitTextFillColor: "transparent"
+                            }}>junior experience</span></p>
+                            <p className="font-semibold text-2xl tracking-tight mt-6 azeret-mono">journey &gt;&gt; dest</p>
+                            <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6">I want to be able to share my experience breaking into the software development industry...</p>
+                        </div>
+                        <div id="Community" className="mt-24 w-64 md:w-76">
+                            <p className="font-semibold text-5xl tracking-tight w-auto">Learning <span style={{ color: "#FF308A" }}>Community</span></p>
+                            <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6 ">I will create a community that can to learn from me <span className="text-primary text-opacity-100">&&</span> each other</p>
+                        </div>
                 </div>
             </div>
             <div className="justify-center items-center mt-48 w-10/12">
                 <div className="divider"></div>
             </div>
-            <div className="flex flex-col items-center gap-24 lg:flex-row lg:items-start xl:gap-48 mt-12">
+            <div className="flex flex-col items-center gap-24 lg:flex-row lg:items-start xl:gap-48 mt-12 p-2">
                 <div id="blogs" className="w-80 mt-12">
                     <p className="font-semibold text-5xl tracking-tight">Keep up with my <span className="text-info">blogs</span></p>
                     <p className="font-semibold text-2xl text-opacity-60 text-base-content/40 leading-9 mt-6">I write blogs about new technologies, personal experience, and projects...</p>
@@ -63,8 +63,8 @@ export default function Home() {
             </div>
             <div id="projects">
                 <div className="relative mt-36 mb-16 text-center">
-                    <p className="text-xl text-base-content/40 mb-12 block xl:hidden">also...</p>
-                    <p className="text-8xl">Check Out My Projects</p>
+                    <p className="text-xl text-base-content/40 mb-4 xl:mb-12 block xl:hidden">also...</p>
+                    <p className="text-6xl md:text-8xl">Check Out My Projects</p>
                     <p className="text-xl text-base-content/40 absolute -left-24 bottom-4 hidden xl:block">also...</p>
                 </div>
             </div>
@@ -72,7 +72,7 @@ export default function Home() {
             {/* <Carousel items={dummy_projects}/> */}
             {/* <button className="btn btn-secondary btn-lg mt-24">Contact Me</button> */}
         </div>
-  </>
+    </>
 }
 
 function BlogList(): JSX.Element {

@@ -5,30 +5,30 @@ import { DateTime } from "luxon";
 
 import { get_blog } from "../scripts/Blogs";
 
-import BlogCard from "../components/BlogCard";
+// import BlogCard from "../components/BlogCard";
 import { BlogData, BlogDataProps } from "../types/BlogTypes";
 
-import dinosaur_image from "../assets/dino-scene.png";
-import coming_soon_image from "../assets/coming-soon.png"
+// import dinosaur_image from "../assets/dino-scene.png";
+// import coming_soon_image from "../assets/coming-soon.png"
 import SkeletonText, { SkeletonTextProps } from "../components/SkeletonText";
 import { blog_is_viewed, set_blogs } from "../scripts/BlogStorage";
 import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
 
-const coming_soon: JSX.Element = <BlogCard
-    id={-2}
-    starred={false}
-    image={coming_soon_image}
-    title=" Next Blog Coming Soon"
-    description="I post these blogs about once a week, check back in a couple of days"
-/>
+// const coming_soon: JSX.Element = <BlogCard
+//     id={-2}
+//     starred={false}
+//     image={coming_soon_image}
+//     title=" Next Blog Coming Soon"
+//     description="I post these blogs about once a week, check back in a couple of days"
+// />
 
-const beginning_of_time: JSX.Element = <BlogCard
-    id={-1}
-    starred={false}
-    image={dinosaur_image}
-    title="There are no previous blogs"
-    description="You reached the beginning of time, say hi to the dinosaurs"
-/>
+// const beginning_of_time: JSX.Element = <BlogCard
+//     id={-1}
+//     starred={false}
+//     image={dinosaur_image}
+//     title="There are no previous blogs"
+//     description="You reached the beginning of time, say hi to the dinosaurs"
+// />
 
 export default function Blog() {
     const { id } = useParams();
@@ -46,13 +46,13 @@ export default function Blog() {
     if (not_found)
         return <BlogNotFound />
     
-    return <div className="flex flex-col justify-center items-center w-full">
-        <div className="flex flex-col w-fill items-center">
+    return <div className="flex flex-col justify-center items-center w-full max-md:mt-8">
+        <div className="flex flex-col w-fill items-center p-4">
                 <BlogContent {...blog} />
         </div>
-        <div id="post-blog" className="flex flex-col w-7/12 ml-[-5%] mt-10 items-center gap-1">
-            <div className="divider w-[110%]" />
-            <div className="flex flex-col items-center gap-1 text-4xl mb-8">
+        <div id="post-blog" className="flex flex-col w-full md:w-7/12 ml-[-5%] mt-10 items-center gap-1">
+            {/* <div className="divider w-[110%]" /> */}
+            {/* <div className="flex flex-col items-center gap-1 text-4xl mb-8">
                 <p>Check out the</p>
                 <p><span className="text-primary font-bold">next</span> and <span className="text-secondary font-bold">prev</span></p>
                 <p>blogs</p>
@@ -60,7 +60,7 @@ export default function Blog() {
             <div className="flex flex-row gap-16">
                 { blog && blog.next === null ? coming_soon : <BlogCard {...blog?.next} /> }
                 { blog && blog.prev === null ? beginning_of_time : <BlogCard {...blog?.prev} />}
-            </div>
+            </div> */}
         </div>
     </div>
 }
@@ -106,10 +106,10 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
             { display && badge_element }
         </div>
         <div className="px-2">
-            <p id="title" className="text-6xl font-bold mt-8">{blog.title}</p>
-            <p id="sub-title" className="text-3xl font-normal mt-8">{blog.description}</p>
+            <p id="title" className="text-4xl md:text-6xl font-bold mt-8">{blog.title}</p>
+            <p id="sub-title" className="text-2xl md:text-3xl font-normal mt-8">{blog.description}</p>
             <div id="dates" className="mt-6 mb-16">
-                <p id="date-created" className="text-xl mt-6">Published: { date_published }</p>
+                <p id="date-created" className="text-md md:text-xl mt-6">Published: { date_published }</p>
                 { display_modified_date && <p id="date-edited" className="text-xl">Edited: { date_modified }</p> }
             </div>
             <div className="prose prose-md md:prose-lg xl:prose-xl">

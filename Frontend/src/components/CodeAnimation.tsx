@@ -24,7 +24,7 @@ export default function CodeAnimation() {
     }, []);
 
 
-    return <div className="mockup-code w-full text-xs md:w-[48rem] md:text-md">
+    return <div className="mockup-code w-full text-[0.55rem] md:w-[48rem] md:text-lg">
         <FormatCode code={code} language="python" cursor={{ row: 11, col: 3 }} />
     </div>
 }
@@ -35,14 +35,6 @@ function FormatCode({ code, language, cursor }: { code: string; language: string
     const needed_lines: number = Math.max(0, min_lines - highlighted_code.length);
 
     return <>
-        {/* {
-            highlighted_code.split("\n").map((code, i) => {
-                return <pre key={i} data-prefix={i + 1} >
-                    <code dangerouslySetInnerHTML={{ __html: code }}/>
-                </pre>
-            })
-        } */}
-
         {
             highlighted_code.concat(Array(needed_lines).fill("")).map((code, i) => {
                 const line_number: string = (i >= highlighted_code.length) ? "" : String(i + 1);

@@ -24,7 +24,7 @@ export default function Blogs() {
     return <>
         <div className="flex flex-col items-center">
             <p className="text-6xl font-semibold">Blogs</p>
-            <p className="text-xl font-medium">Check in <span className="font-semibold text-primary">every week</span> for a <span className="font-semibold text-secondary">new</span> article!</p>
+            <p className="text-xl font-medium p-4 text-center">Check in <span className="font-semibold text-primary">every week</span> for a <span className="font-semibold text-secondary">new</span> article!</p>
             <div className="flex justify-center w-full">
                 <div id="blog-gallery" className="w-3/4 flex flex-row flex-wrap justify-center gap-6 mt-8">
                     { cards }
