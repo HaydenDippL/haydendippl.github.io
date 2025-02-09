@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 
 import profile_photo from "../assets/pfp.jpg";
+import { log_referring_to } from "../scripts/Logging";
 
 // TODO: add youtube link
 const YOUTUBE_LINK: string = "https://www.youtube.com";
@@ -19,9 +20,9 @@ export default function Footer() {
             </div>
             <div id="social-links" className="flex flex-col gap-2">
                 <p className="font-bold mb-3">Socials</p>
-                <a id="YouTube" href={YOUTUBE_LINK} target="_blank" className="underline text-primary">YouTube</a>
-                <a id="GitHub" href={GITHUB_LINK} target="_blank" className="underline text-primary">GitHub</a>
-                <a id="LinkedIn" href={LINKEDIN_LINK} target="_blank" className="underline text-primary">LinkedIn</a>
+                <a id="YouTube" href={YOUTUBE_LINK} onClick={() => { log_referring_to("YouTube"); }} target="_blank" className="underline text-primary">YouTube</a>
+                <a id="GitHub" href={GITHUB_LINK} onClick={() => { log_referring_to("GitHub"); }} target="_blank" className="underline text-primary">GitHub</a>
+                <a id="LinkedIn" href={LINKEDIN_LINK} onClick={() => { log_referring_to("LinkedIn"); }} target="_blank" className="underline text-primary">LinkedIn</a>
             </div>
         </div>
         <div id="credits" className="flex flex-col text-2xl font-semibold -ml-6">
