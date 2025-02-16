@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.azeret-mono {
-    font-family: "Azeret Mono", serif;
+.font-inter {
+    font-family: "Inter", serif;
     font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
+}
+
+@layer components {
+    .title-text {
+        @apply text-5xl sm:text-6xl font-semibold text-white font-inter
+    }
+
+    .subtitle-text {
+        @apply text-4xl sm:text-4xl font-semibold text-white font-inter
+    }
+
+    .content-text {
+        @apply text-3xl sm:text-3xl font-semibold text-white font-inter
+    }
 }

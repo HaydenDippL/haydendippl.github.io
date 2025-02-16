@@ -1,9 +1,8 @@
-import CodeAnimation from "../components/CodeAnimation";
-
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router";
 
 import profile_photo from "../assets/pfp.jpg";
+import globe_icon from "../assets/globe-icon.svg"
 
 import { PinnedRecentBlogs } from "../types/BlogTypes";
 
@@ -12,67 +11,82 @@ import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
 import { blog_is_viewed } from "../scripts/BlogStorage";
 
 export default function Home() {
-    return <>
-        <div className="flex flex-col items-center">
-            <div className="flex flex-col md:flex-row gap-16 md:gap-24 lg:gap-48">
-                <div id="Hello" className="w-80 mt-12">
-                    <p className="font-semibold text-5xl tracking-tight">Hi, my name is <span className="text-primary">Hayden Dippel</span></p>
-                    <p className="font-semibold text-2xl text-opacity-60 text-base-content/40 leading-9 mt-6">I am a soon to be graduate from the University of <span className="font-extrabold" style={{color: "#A92A38"}}>Wisconsin</span>-Madison</p>
+    const profile_picture_element: JSX.Element = <div id="Picture" className="relative w-max pb-12">
+        <img className="w-80 h-80 mask mask-circle" src={profile_photo} />
+        <img
+            src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/e/e3/University_of_Wisconsin%E2%80%93Madisonlogo_square.png"
+            alt="University of Wisconsin-Madison Logo"
+            className="absolute bottom-0 right-1 w-36 h-36"
+        />
+    </div>
+
+    return <div className="flex flex-row w-full justify-center">
+        <div className="flex flex-col w-full items-center">
+            <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] text-white font-inter relative">
+                <div className="hidden 2xl:inline-block absolute top-4 -right-96">{ profile_picture_element }</div>
+                <p id="hello" className="title-text mb-3">Hi, my name is <span className="text-primary">Hayden Dippel</span></p>
+                <div id="location" className="flex flex-row items-center gap-2 mb-12">
+                    <img src={globe_icon} alt="Globe Icon" className="w-12 h-12 opacity-70" />
+                    <p className="subtitle-text font-bold opacity-50">Madison, WI</p>
                 </div>
-                <div id="Picture" className="relative pb-12">
-                    <img className="w-80 h-80 mask mask-circle" src={profile_photo} />
-                    <img
-                        src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/e/e3/University_of_Wisconsin%E2%80%93Madisonlogo_square.png"
-                        alt="University of Wisconsin-Madison Logo"
-                        className="absolute bottom-0 right-1 w-36 h-36"
-                    />
+                <div className="2xl:hidden">{ profile_picture_element }</div>
+                <p id="intro" className="content-text">I am a full-stack developer graduating from the University of Wisconsin in the spring of 2025. I have experience with...</p>
+                <div id="skills" className="content-text flex flex-wrap gap-x-3.5 gap-y-2 mb-16">
+                    <TechButton color="#58c4dc" name="React" />
+                    <TechButton color="#cf44f9" name="Angular" />
+                    <TechButton color="#3178c6" name="TypeScript" />
+                    <TechButton color="#0c4b33" name="Django" />
+                    <TechButton color="#ffdf5d" name="Python" />
+                    <TechButton color="#c5df2f" name="SQL" />
+                    <TechButton color="#bb74da" name=".NET" />
+                    <TechButton color="#659bd3" name="C++" />
                 </div>
+                <p className="title-text">Check Out My <Link to="/projects" className="underline" style={{"color": "#6dfff8"}}>Projects</Link></p>
             </div>
-            <div className="flex flex-col xl:flex-row gap-24 justify-center items-center xl:items-start mt-32">
-                <div className="w-full xl:w-9/12">
-                    <CodeAnimation />
-                </div>
-                <div className="flex flex-col">
-                    <div className="flex flex-col justify-center w-64 md:w-96">
-                            <p className="font-semibold text-5xl tracking-tight">Experience the <span style={{
-                                background: "linear-gradient(to right, #308AFF, #FF308A)",
-                                WebkitBackgroundClip: "text",
-                                backgroundClip: "text",
-                                WebkitTextFillColor: "transparent"
-                            }}>junior experience</span></p>
-                            <p className="font-semibold text-2xl tracking-tight mt-6 azeret-mono">journey &gt;&gt; dest</p>
-                            <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6">I want to be able to share my experience breaking into the software development industry...</p>
-                        </div>
-                        <div id="Community" className="mt-24 w-64 md:w-76">
-                            <p className="font-semibold text-5xl tracking-tight w-auto">Learning <span style={{ color: "#FF308A" }}>Community</span></p>
-                            <p className="font-semibold text-2xl text-opacity-80 text-base-content/40 leading-9 mt-6 ">I will create a community that can to learn from me <span className="text-primary text-opacity-100">&&</span> each other</p>
-                        </div>
-                </div>
+            {/* TODO: implement carousel */}
+            {/* <Carousel /> */}
+            <div className="flex flex-col items-center font-inter mb-16">
+                <button className="btn btn-secondary btn-lg">Download Resume</button>
             </div>
-            <div className="justify-center items-center mt-48 w-10/12">
-                <div className="divider"></div>
-            </div>
-            <div className="flex flex-col items-center gap-24 lg:flex-row lg:items-start xl:gap-48 mt-12 p-2">
-                <div id="blogs" className="w-80 mt-12">
-                    <p className="font-semibold text-5xl tracking-tight">Keep up with my <span className="text-info">blogs</span></p>
-                    <p className="font-semibold text-2xl text-opacity-60 text-base-content/40 leading-9 mt-6">I write blogs about new technologies, personal experience, and projects...</p>
-                    <p className="font-semibold text-2xl text-opacity-60 text-base-content/40 leading-9 mt-6">Here are <span className="text-info">5</span> of my most recent blogs</p>
-                </div>
-                {/* TODO: ensure that text gets cut off after certain length... */}
+            <div className="divider w-[90%] lg:w-[70%] mx-auto mb-12" />
+            <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] text-white font-inter">
+                <p className="title-text mb-12">Keep up with my <Link to="/blogs" className="underline" style={{"color": "#6dfff8"}}>Blogs</Link></p>
+                <p className="content-text font-semibold mb-12">I write blogs about now tech, personal experiences, and projects. Here are some of my most recent blogs.</p>
                 <BlogList />
             </div>
-            <div id="projects">
-                <div className="relative mt-36 mb-16 text-center">
-                    <p className="text-xl text-base-content/40 mb-4 xl:mb-12 block xl:hidden">also...</p>
-                    <p className="text-6xl md:text-8xl">Check Out My Projects</p>
-                    <p className="text-xl text-base-content/40 absolute -left-24 bottom-4 hidden xl:block">also...</p>
-                </div>
-            </div>
-            <p className="text-4xl opacity-50">Coming Soon!</p>
-            {/* <Carousel items={dummy_projects}/> */}
-            {/* <button className="btn btn-secondary btn-lg mt-24">Contact Me</button> */}
         </div>
-    </>
+    </div>
+}
+
+function TechButton({ color, name }: { color: string, name: string }) {
+    type HoverFocusEvent = React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FocusEvent<HTMLButtonElement, Element>;
+    const set_colors = (e: HoverFocusEvent) => {
+        const button = e.currentTarget;
+        button.style.backgroundColor = color;
+        button.style.borderColor = color;
+    };
+    const reset_colors = (e: HoverFocusEvent) => {
+        const button = e.currentTarget;
+            button.style.backgroundColor = "transparent";
+            button.style.borderColor = "rgba(255, 255, 255, 0.5)";
+    }
+
+    return <button 
+        className="bg-transparent px-2.5 py-0.5
+            border-solid border-2 border-white/50 rounded-lg
+            transform transition-all duration-300 ease-in-out
+            hover:scale-125 hover:z-[900] focus:scale-125 hover:z-[900]"
+        style={{
+            "--hover-color": color,
+            transition: "transform 0.3s, background-color 0.3s, border-color 0.3s",
+        } as React.CSSProperties}
+        onMouseEnter={(e) => set_colors(e)}
+        onMouseLeave={(e) => reset_colors(e)}
+        onFocus={(e) => set_colors(e)}
+        onBlur={(e) => reset_colors(e)} 
+    >
+        {name}
+    </button>
 }
 
 function BlogList(): JSX.Element {
@@ -116,7 +130,6 @@ function BlogLink({ id, title, starred }: { id?: number, title?: string, starred
 
     const { blog_memory } = useContext(BlogsViewedContext);
 
-    // TODO: cut off text after a certain length
     const new_blog: boolean = blog_is_viewed(blog_memory, id);
     const color: string = new_blog ? "bg-primary" : "bg-secondary";
     const mask: string = starred ? "mask mask-star-2 " : "mask mask-circle";
