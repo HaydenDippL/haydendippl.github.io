@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { get_blog_ids } from "../scripts/Blogs";
 
-import { ArticleType, article_is_viewed_in_local_storage, new_articles_exist } from "../scripts/ArticleStorage";
+import { ArticleType, new_articles_exist } from "../scripts/ArticleStorage";
 import { log_referring_to } from "../scripts/Logging";
 
 
 // TODO: add control + K to search bar and icons in the search bar itself it indicate this
 
 // TODO: add youtube link
-const YOUTUBE_LINK: string = "https://www.youtube.com";
+// const YOUTUBE_LINK: string = "https://www.youtube.com";
 const GITHUB_LINK: string = "https://github.com/HaydenDippL";
 // TODO: add linkedin link
 const LINKEDIN_LINK: string = "https://www.linkedin.com/";
