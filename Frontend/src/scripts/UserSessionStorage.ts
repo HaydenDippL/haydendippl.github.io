@@ -10,17 +10,14 @@ const SESSION_ID_KEY = "session-id";
  * @returns the user id (UUID)
  */
 export async function get_user_id(): Promise<string | null> {
-    const user_id = get_user_id_from_storage() || await get_user_id_from_backend();
+    let user_id: string | null = get_user_id_from_storage();
     if (!user_id) {
-        console.error("Error getting user-id from backend");
-        return null;
+        const retrieved_user_id: boolean = await get_user_id_from_backend();
+        if (!retrieved_user_id) console.error("Error getting user-id from backend");
+        user_id = get_user_id_from_storage();
     }
 
-    if (!set_user_UUID(user_id)) {
-        return null;
-    } else {
-        return user_id;
-    }
+    return user_id
 }
 
 /**
@@ -28,7 +25,7 @@ export async function get_user_id(): Promise<string | null> {
  * 
  * @returns user-id or null if it isn't in storage
  */
-function get_user_id_from_storage(): string | null {
+export function get_user_id_from_storage(): string | null {
     return localStorage.getItem(USER_ID_KEY)
 }
 
@@ -38,7 +35,7 @@ function get_user_id_from_storage(): string | null {
  * 
  * @returns user id from the backend
  */
-async function get_user_id_from_backend(): Promise<string | null> {
+export async function get_user_id_from_backend(): Promise<boolean> {
     const url: string = `${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_CREATE_USER_PATH}`;
     const headers = { "Content-Type": "application/json" };
     const resp = await fetch(url, { method: 'POST', headers: headers });
@@ -46,10 +43,10 @@ async function get_user_id_from_backend(): Promise<string | null> {
 
     if (resp.status === 500) {
         console.error(`500: ${data["error"] || "INTERNAL SERVER ERROR"}`);
-        return null;
+        return false;
     } else if (resp.status !== 200) {
         console.error(`${resp.status}: Unexpected status code retrieving user and session`);
-        return null;
+        return false;
     }
 
     const user_id: string | undefined = data["user-id"];
@@ -57,11 +54,11 @@ async function get_user_id_from_backend(): Promise<string | null> {
 
     if (!user_id || !session_id) {
         console.error(`'user-id' and 'session-id' not present in response`);
-        return null;
+        return false;
     }
 
     set_session_UUID(session_id);
-    return user_id;
+    return set_user_UUID_in_storage(user_id);
 }
 
 /**
@@ -70,7 +67,7 @@ async function get_user_id_from_backend(): Promise<string | null> {
  * @param uuid of the user
  * @return true if successful, false otherwise
  */
-function set_user_UUID(uuid: string): boolean {
+export function set_user_UUID_in_storage(uuid: string): boolean {
     try {
         localStorage.setItem(USER_ID_KEY, uuid);
         return true;
@@ -89,35 +86,12 @@ function set_user_UUID(uuid: string): boolean {
  */
 export async function get_session(): Promise<string | null> {
     let session_id: string | null = get_session_id_from_storage();
-    let user_id: string | null = get_user_id_from_storage();
+    if (session_id) return session_id;
 
-    if (!session_id) {
-        if (!user_id) {
-            user_id = await get_user_id_from_backend();
-            if (user_id === null) {
-                console.error("Could not get user-id");
-                return null;
-            }
-            if (!set_user_UUID(user_id)) {
-                console.error("Could not set user-id");
-                return null;
-            }
-            session_id = get_session_id_from_storage();
-        } else {
-            session_id = await get_session_UUID_from_backend(user_id);
-        }
-    }
+    await get_session_UUID_from_backend();
 
-    if (!session_id) {
-        console.log("Could not get session-id");
-        return null;
-    }
-
-    if (!set_session_UUID(session_id)) {
-        return null;
-    } else {
-        return session_id;
-    }
+    session_id = get_session_id_from_storage();
+    return session_id;
 }
 
 /**
@@ -125,7 +99,7 @@ export async function get_session(): Promise<string | null> {
  * 
  * @returns the session id or null
  */
-function get_session_id_from_storage(): string | null {
+export function get_session_id_from_storage(): string | null {
     return sessionStorage.getItem(SESSION_ID_KEY);
 }
 
@@ -134,32 +108,43 @@ function get_session_id_from_storage(): string | null {
  * 
  * @returns session id from the backend
  */
-async function get_session_UUID_from_backend(user_id: string): Promise<string | null> {
-    const url: string = `${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_CREATE_SESSION_PATH}`;
-    const headers = { "Content-Type": "application/json" };
-    const body: string = JSON.stringify({ "user-id": user_id });
-    const resp = await fetch(url, { method: "POST", body: body, headers: headers });
+export async function get_session_UUID_from_backend(): Promise<boolean> {
+    let user_id: string | null = get_user_id_from_storage();
+    if (!user_id) {
+        const success: boolean = await get_user_id_from_backend();
+        if (!success) return false;
+        else return true;
+    }
+
+    async function call_backend(user_id: string): Promise<Response> {
+        const url: string = `${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_CREATE_SESSION_PATH}`;
+        const headers = { "Content-Type": "application/json" };
+        const body: string = JSON.stringify({ "user-id": user_id });
+        const resp = await fetch(url, { method: "POST", body: body, headers: headers });
+        return resp;
+    }
+
+    const resp = await call_backend(user_id);
     const data = await resp.json();
 
     if (resp.status === 500) {
         console.error(`500: ${data["error"] || "INTERNAL SERVER ERROR"}`);
-        return null;
+        return false;
     } else if (resp.status === 403) {
-        console.error(`403: User does not exist`);
-        return null;
+        return get_user_id_from_backend();
     } else if (resp.status !== 200) {
         console.error(`${resp.status}: Unexpected status code retrieving user and session`);
-        return null;
+        return false;
     }
 
     const session_id: string | undefined = data["session-id"];
 
     if (!session_id) {
         console.error(`'session-id' not present in response`);
-        return null;
+        return false;
     }
 
-    return session_id;
+    return set_session_UUID(session_id);
 }
 
 /**
@@ -168,7 +153,7 @@ async function get_session_UUID_from_backend(user_id: string): Promise<string | 
  * @param uuid of the session from the backend
  * @returns true if successful, false otherwise
  */
-function set_session_UUID(uuid: string): boolean {
+export function set_session_UUID(uuid: string): boolean {
     try {
         sessionStorage.setItem(SESSION_ID_KEY, uuid);
         return true;
