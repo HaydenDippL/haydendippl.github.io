@@ -7,8 +7,7 @@ import globe_icon from "../assets/globe-icon.svg"
 import { PinnedRecentBlogs } from "../types/BlogTypes";
 
 import { get_pinned_and_recent } from "../scripts/Blogs";
-import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
-import { blog_is_viewed } from "../scripts/BlogStorage";
+import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 
 export default function Home() {
     const profile_picture_element: JSX.Element = <div id="Picture" className="relative w-max pb-12">
@@ -128,9 +127,7 @@ function BlogLink({ id, title, starred }: { id?: number, title?: string, starred
     if (id === undefined || title === undefined || starred === undefined)
         return <div className="rounded-lg bg-black bg-opacity-20 h-16 skeleton" /> 
 
-    const { blog_memory } = useContext(BlogsViewedContext);
-
-    const new_blog: boolean = blog_is_viewed(blog_memory, id);
+    const new_blog: boolean = article_is_viewed_in_local_storage(id as number, ArticleType.blog);
     const color: string = new_blog ? "bg-primary" : "bg-secondary";
     const mask: string = starred ? "mask mask-star-2 " : "mask mask-circle";
     const placement: string = starred ? "-top-3.5 -right-3.5" : "-top-2 -right-2";

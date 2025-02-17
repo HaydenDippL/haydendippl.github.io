@@ -1,13 +1,12 @@
 import { Link } from "react-router";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 
-import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
+import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 
 import { BlogPreviewProps } from "../types/BlogTypes";
 
 import SkeletonText from "./SkeletonText";
 import { SkeletonTextProps } from "./SkeletonText";
-import { BLOG_NOT_VIEWED } from "../scripts/BlogStorage";
 
 export default function BlogCard(blog_preview: BlogPreviewProps) {
     if (
@@ -19,16 +18,8 @@ export default function BlogCard(blog_preview: BlogPreviewProps) {
         blog_preview.description === undefined
     ) return <SkeletonBlogCard />
 
-    const { blog_memory } = useContext(BlogsViewedContext);
     const [image_loading, set_image_loading] = useState<boolean>(true);
     const [image_src, set_image_src] = useState<string>("");
-
-    function blog_is_viewed(): boolean {
-        const id: number = blog_preview.id as number;
-        if (id >= blog_memory.length) return false;
-        else if (blog_memory[id] == BLOG_NOT_VIEWED) return true;
-        else return false;
-    }
 
     useEffect(() => {
         if (blog_preview.image === undefined) return
@@ -43,7 +34,7 @@ export default function BlogCard(blog_preview: BlogPreviewProps) {
     }, [blog_preview.image]);
 
     /// TODO: implement cache / cookies, account for the no_next / no_prev cards and don't display badges for them
-    const viewed: Boolean = blog_is_viewed();
+    const viewed: Boolean = article_is_viewed_in_local_storage(blog_preview.id as number, ArticleType.blog);
     const color: string = viewed ? "bg-primary" : "bg-secondary";
     const mask: string = blog_preview.starred ? "mask mask-star-2 " : "mask mask-circle";
     const placement: string = blog_preview.starred ? "-top-3.5 -right-3.5" : "-top-2 -right-2";

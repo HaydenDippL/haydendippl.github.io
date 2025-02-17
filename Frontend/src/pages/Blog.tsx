@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router";
 
 import { DateTime } from "luxon";
@@ -11,24 +11,7 @@ import { BlogData, BlogDataProps } from "../types/BlogTypes";
 // import dinosaur_image from "../assets/dino-scene.png";
 // import coming_soon_image from "../assets/coming-soon.png"
 import SkeletonText, { SkeletonTextProps } from "../components/SkeletonText";
-import { blog_is_viewed, set_blogs } from "../scripts/BlogStorage";
-import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
-
-// const coming_soon: JSX.Element = <BlogCard
-//     id={-2}
-//     starred={false}
-//     image={coming_soon_image}
-//     title=" Next Blog Coming Soon"
-//     description="I post these blogs about once a week, check back in a couple of days"
-// />
-
-// const beginning_of_time: JSX.Element = <BlogCard
-//     id={-1}
-//     starred={false}
-//     image={dinosaur_image}
-//     title="There are no previous blogs"
-//     description="You reached the beginning of time, say hi to the dinosaurs"
-// />
+import { ArticleType, article_is_viewed_in_local_storage, set_article_memory_in_local_storage } from "../scripts/ArticleStorage";
 
 export default function Blog() {
     const { id } = useParams();
@@ -50,18 +33,6 @@ export default function Blog() {
         <div className="flex flex-col w-fill items-center p-4">
                 <BlogContent {...blog} />
         </div>
-        <div id="post-blog" className="flex flex-col w-full md:w-7/12 ml-[-5%] mt-10 items-center gap-1">
-            {/* <div className="divider w-[110%]" /> */}
-            {/* <div className="flex flex-col items-center gap-1 text-4xl mb-8">
-                <p>Check out the</p>
-                <p><span className="text-primary font-bold">next</span> and <span className="text-secondary font-bold">prev</span></p>
-                <p>blogs</p>
-            </div>
-            <div className="flex flex-row gap-16">
-                { blog && blog.next === null ? coming_soon : <BlogCard {...blog?.next} /> }
-                { blog && blog.prev === null ? beginning_of_time : <BlogCard {...blog?.prev} />}
-            </div> */}
-        </div>
     </div>
 }
 
@@ -78,16 +49,13 @@ function BlogContent(blog: BlogDataProps): JSX.Element {
         blog.content === undefined
     ) return <BlogSkeleton />
 
-    const { blog_memory, set_blog_memory } = useContext(BlogsViewedContext);
     const [new_blog, set_new_blog] = useState<boolean>(false);
 
     useEffect(() => {
-        const blog_is_new: boolean = !blog_is_viewed(blog_memory, blog.id as number);
-        console.log(blog_is_new);
+        const blog_is_new: boolean = !article_is_viewed_in_local_storage(blog.id as number, ArticleType.blog);
         set_new_blog(blog_is_new);
         if (blog_is_new) {
-            const new_blog_memory: string = set_blogs(blog_memory, blog.id as number, true);
-            set_blog_memory(new_blog_memory);
+            set_article_memory_in_local_storage(blog.id as number, true, ArticleType.blog);
         }
     }, []);
 

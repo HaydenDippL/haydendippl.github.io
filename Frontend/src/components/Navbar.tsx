@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { get_blog_ids } from "../scripts/Blogs";
 
-import { BlogsViewedContext } from "../contexts/BlogsViewedContextProvider";
-import { BLOG_NOT_VIEWED } from "../scripts/BlogStorage";
+import { ArticleType, article_is_viewed_in_local_storage, new_articles_exist } from "../scripts/ArticleStorage";
 import { log_referring_to } from "../scripts/Logging";
 
 
@@ -16,21 +15,7 @@ const GITHUB_LINK: string = "https://github.com/HaydenDippL";
 const LINKEDIN_LINK: string = "https://www.linkedin.com/";
 
 export default function Navbar() {
-    const { blog_memory } = useContext(BlogsViewedContext);
-    const [new_blogs, set_new_blogs] = useState<boolean>(new_blog_in_blog_memory());
-
-    useEffect(() => {
-        set_new_blogs(new_blog_in_blog_memory());
-    }, [blog_memory]);
-
-    function new_blog_in_blog_memory(): boolean {
-        const blog_ids = get_blog_ids();
-        const new_blog_found = blog_ids.some(id => {
-            if (id >= blog_memory.length) return true;
-            else return blog_memory[id] == BLOG_NOT_VIEWED;
-        });
-        return new_blog_found;
-    }
+    const new_blogs: boolean = new_articles_exist(ArticleType.blog);
     
     const blog_badge: JSX.Element = <div className={`absolute z-[999] w-5 h-5 -top-2 -right-2 bg-secondary mask mask-circle`} />
 

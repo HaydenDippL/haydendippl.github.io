@@ -3,7 +3,9 @@ import { DateTime } from "luxon";
 import { BlogData, BlogPreviewData, PinnedRecentBlogs } from "../types/BlogTypes";
 
 // import the pages
-import { TheImportanceOfPlanningBlog } from "../blogs/The-Importance-Of-Planning"
+import {
+    TheImportanceOfPlanningBlog
+} from "../blogs/The-Importance-Of-Planning"
 
 const blogs: BlogData[] = [
     TheImportanceOfPlanningBlog
