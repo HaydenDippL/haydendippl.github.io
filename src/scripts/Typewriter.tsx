@@ -389,12 +389,12 @@ export default class Typewriter {
 
 // TODO: docs too_many_characters_error_message
 // TODO: test too_many_characters_error_message
-function too_many_characters_error_message(i: number, text: string, num_deletions: number): string {
-    // TODO: improve message with instruction pointer
-    // TODO: reverse too
-    text;
-    return `Tried to illegally delete ${num_deletions} chracters from index: ${i}`;
-}
+// function too_many_characters_error_message(i: number, text: string, num_deletions: number): string {
+//     // TODO: improve message with instruction pointer
+//     // TODO: reverse too
+//     text;
+//     return `Tried to illegally delete ${num_deletions} chracters from index: ${i}`;
+// }
 
 // TODO: test get_index
 /**

@@ -30,6 +30,7 @@ export default function CodeAnimation() {
 }
 
 function FormatCode({ code, language, cursor }: { code: string; language: string; cursor?: Cursor }): JSX.Element {
+    cursor;
     const highlighted_code: string[] = hljs.highlight(code, { language: language }).value.split("\n");
     const min_lines: number = 25;
     const needed_lines: number = Math.max(0, min_lines - highlighted_code.length);
