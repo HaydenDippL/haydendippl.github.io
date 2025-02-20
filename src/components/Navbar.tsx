@@ -17,8 +17,9 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     const new_blogs: boolean = new_articles_exist(ArticleType.blog);
+    const new_projects: boolean = new_articles_exist(ArticleType.project);
     
-    const blog_badge: JSX.Element = <div className={`absolute z-[999] w-5 h-5 -top-2 -right-2 bg-secondary mask mask-circle`} />
+    const new_article_badge: JSX.Element = <div className={`absolute z-[999] w-5 h-5 -top-2 -right-2 bg-secondary mask mask-circle`} />
 
     return <div className="">
         <div id="navbar" className="fixed w-full flex flex-row justify-between items-center gap-2 p-4 bg-base-100/90 border-b border-b-black pt-8 z-[9999]">
@@ -42,14 +43,15 @@ export default function Navbar() {
                         onClick={() => navigate("/blogs")}
                     >
                         Blogs
-                        { new_blogs && blog_badge}
+                        { new_blogs && new_article_badge }
                     </button>
                     <button
                         id="projects-link"
-                        className="btn btn-default text-3xl font-semibold"
+                        className="btn btn-default relative text-3xl font-semibold"
                         onClick={() => navigate("/projects")}
                     >
                         Projects
+                        { new_projects && new_article_badge }
                     </button>
                 </div>
                 <div id="social-links" className="flex flex-row gap-2 hidden md:inline-flex">
