@@ -8,6 +8,8 @@ import { PinnedRecentBlogs } from "../types/BlogTypes";
 
 import { get_pinned_and_recent } from "../scripts/Blogs";
 import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
+import TechBadge from "../components/TechBadge";
+import { Tech } from "../types/TechBadge";
 
 export default function Home() {
     const profile_picture_element: JSX.Element = <div id="Picture" className="relative w-max pb-12">
@@ -31,14 +33,14 @@ export default function Home() {
                 <div className="2xl:hidden">{ profile_picture_element }</div>
                 <p id="intro" className="content-text">I am a full-stack developer graduating from the University of Wisconsin in the spring of 2025. I have experience with...</p>
                 <div id="skills" className="content-text flex flex-wrap gap-x-3.5 gap-y-2 mb-16">
-                    <TechButton color="#58c4dc" name="React" />
-                    <TechButton color="#cf44f9" name="Angular" />
-                    <TechButton color="#3178c6" name="TypeScript" />
-                    <TechButton color="#0c4b33" name="Django" />
-                    <TechButton color="#ffdf5d" name="Python" />
-                    <TechButton color="#c5df2f" name="SQL" />
-                    <TechButton color="#bb74da" name=".NET" />
-                    <TechButton color="#659bd3" name="C++" />
+                    <TechBadge tech={Tech.React} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.Angular} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.TypeScript} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.Django} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.Python} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.SQL} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.DotNET} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.Cpp} size="lg" transparent={true} grow={true} link={undefined} />
                 </div>
                 <p className="title-text">Check Out My <Link to="/projects" className="underline" style={{"color": "#6dfff8"}}>Projects</Link></p>
             </div>
@@ -55,37 +57,6 @@ export default function Home() {
             </div>
         </div>
     </div>
-}
-
-function TechButton({ color, name }: { color: string, name: string }) {
-    type HoverFocusEvent = React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FocusEvent<HTMLButtonElement, Element>;
-    const set_colors = (e: HoverFocusEvent) => {
-        const button = e.currentTarget;
-        button.style.backgroundColor = color;
-        button.style.borderColor = color;
-    };
-    const reset_colors = (e: HoverFocusEvent) => {
-        const button = e.currentTarget;
-            button.style.backgroundColor = "transparent";
-            button.style.borderColor = "rgba(255, 255, 255, 0.5)";
-    }
-
-    return <button 
-        className="bg-transparent px-2.5 py-0.5
-            border-solid border-2 border-white/50 rounded-lg
-            transform transition-all duration-300 ease-in-out
-            hover:scale-125 hover:z-[900] focus:scale-125 hover:z-[900]"
-        style={{
-            "--hover-color": color,
-            transition: "transform 0.3s, background-color 0.3s, border-color 0.3s",
-        } as React.CSSProperties}
-        onMouseEnter={(e) => set_colors(e)}
-        onMouseLeave={(e) => reset_colors(e)}
-        onFocus={(e) => set_colors(e)}
-        onBlur={(e) => reset_colors(e)} 
-    >
-        {name}
-    </button>
 }
 
 function BlogList(): JSX.Element {
