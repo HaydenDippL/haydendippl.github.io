@@ -5,13 +5,10 @@ import { log_referring_to } from "../scripts/Logging";
 
 import { useNavigate } from "react-router";
 
+import { ExternalLink } from "../scripts/ExternalLinks";
+
 
 // TODO: add control + K to search bar and icons in the search bar itself it indicate this
-
-// TODO: add youtube link
-// const YOUTUBE_LINK: string = "https://www.youtube.com";
-const GITHUB_LINK: string = "https://github.com/HaydenDippL";
-const LINKEDIN_LINK: string = "https://www.linkedin.com/in/hayden-dippel/";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -66,7 +63,7 @@ export default function Navbar() {
                     </div> */}
                     <div id="GitHub" className="opacity-10 cursor-pointer" onClick={() => {
                         log_referring_to("GitHub");
-                        window.open(GITHUB_LINK);
+                        window.open(ExternalLink.GitHub);
                     }}>
                         <svg viewBox="0 0 24 24" width="50px" height="50px">
                             <path
@@ -78,7 +75,7 @@ export default function Navbar() {
                     </div>
                     <div id="LinkedIn" className="opacity-10 cursor-pointer" onClick={() => {
                         log_referring_to("LinkedIn");
-                        window.open(LINKEDIN_LINK);
+                        window.open(ExternalLink.LinkedIn);
                     }}>
                         <svg viewBox="0 0 30 30" width="50px" height="50px">
                             <path
