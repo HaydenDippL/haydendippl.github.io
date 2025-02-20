@@ -33,14 +33,14 @@ export default function Home() {
                 <div className="2xl:hidden">{ profile_picture_element }</div>
                 <p id="intro" className="content-text">I am a full-stack developer graduating from the University of Wisconsin in the spring of 2025. I have experience with...</p>
                 <div id="skills" className="content-text flex flex-wrap gap-x-3.5 gap-y-2 mb-16">
-                    <TechBadge tech={Tech.React} size="lg" transparent={true} grow={true} link={undefined} />
-                    <TechBadge tech={Tech.Angular} size="lg" transparent={true} grow={true} link={undefined} />
-                    <TechBadge tech={Tech.TypeScript} size="lg" transparent={true} grow={true} link={undefined} />
-                    <TechBadge tech={Tech.Django} size="lg" transparent={true} grow={true} link={undefined} />
-                    <TechBadge tech={Tech.Python} size="lg" transparent={true} grow={true} link={undefined} />
-                    <TechBadge tech={Tech.SQL} size="lg" transparent={true} grow={true} link={undefined} />
-                    <TechBadge tech={Tech.DotNET} size="lg" transparent={true} grow={true} link={undefined} />
-                    <TechBadge tech={Tech.Cpp} size="lg" transparent={true} grow={true} link={undefined} />
+                    <TechBadge tech={Tech.React} size="lg" transparent={true} grow={true} />
+                    <TechBadge tech={Tech.Angular} size="lg" transparent={true} grow={true} />
+                    <TechBadge tech={Tech.TypeScript} size="lg" transparent={true} grow={true} />
+                    <TechBadge tech={Tech.Django} size="lg" transparent={true} grow={true} />
+                    <TechBadge tech={Tech.Python} size="lg" transparent={true} grow={true} />
+                    <TechBadge tech={Tech.SQL} size="lg" transparent={true} grow={true} />
+                    <TechBadge tech={Tech.DotNET} size="lg" transparent={true} grow={true} />
+                    <TechBadge tech={Tech.Cpp} size="lg" transparent={true} grow={true} />
                 </div>
                 <p className="title-text">Check Out My <Link to="/projects" className="underline" style={{"color": "#6dfff8"}}>Projects</Link></p>
             </div>

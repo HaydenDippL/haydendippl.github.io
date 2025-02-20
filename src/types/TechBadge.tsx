@@ -14,5 +14,5 @@ export type TechBadgeProps = {
     size: "lg" | "sm",
     transparent: boolean,
     grow: boolean
-    link: string | undefined
+    link?: string
 }
