@@ -11,8 +11,7 @@ import { useNavigate } from "react-router";
 // TODO: add youtube link
 // const YOUTUBE_LINK: string = "https://www.youtube.com";
 const GITHUB_LINK: string = "https://github.com/HaydenDippL";
-// TODO: add linkedin link
-const LINKEDIN_LINK: string = "https://www.linkedin.com/";
+const LINKEDIN_LINK: string = "https://www.linkedin.com/in/hayden-dippel/";
 
 export default function Navbar() {
     const navigate = useNavigate();
