@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import { ArticleType, new_articles_exist } from "../scripts/ArticleStorage";
 import { log_referring_to } from "../scripts/Logging";
 
+import { useNavigate } from "react-router";
+
 
 // TODO: add control + K to search bar and icons in the search bar itself it indicate this
 
@@ -13,6 +15,8 @@ const GITHUB_LINK: string = "https://github.com/HaydenDippL";
 const LINKEDIN_LINK: string = "https://www.linkedin.com/";
 
 export default function Navbar() {
+    const navigate = useNavigate();
+
     const new_blogs: boolean = new_articles_exist(ArticleType.blog);
     
     const blog_badge: JSX.Element = <div className={`absolute z-[999] w-5 h-5 -top-2 -right-2 bg-secondary mask mask-circle`} />
@@ -23,40 +27,31 @@ export default function Navbar() {
                 <Link to="/" className="text-4xl font-semibold">
                     HaydenDippL
                 </Link>
-                {/* <label id="search" className="input input-bordered flex items-center gap-2">
-                    <input type="text" className="grow" placeholder="Search" />
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 16 16"
-                        fill="currentColor"
-                        className="h-4 w-4 opacity-70"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
-                </label> */}
             </div>
             <div className="flex flex-row gap-24 justify-center w-full md:w-auto">
                 <div id="nav-links" className="flex flex-row gap-8 items-center">
-                    <button id="home-link" className="btn btn-default">
-                        <Link to="/" className="text-3xl font-semibold">
-                            Home
-                        </Link>
+                    <button
+                        id="home-link"
+                        className="btn btn-default text-3xl font-semibold"
+                        onClick={() => navigate("/")}
+                    >
+                        Home
                     </button>
-                    <button id="blogs-link" className="btn btn-default relative">
-                        <Link to="/blogs" className="text-3xl font-semibold">
-                            Blogs
-                        </Link>
+                    <button
+                        id="blogs-link"
+                        className="btn btn-default relative text-3xl font-semibold"
+                        onClick={() => navigate("/blogs")}
+                    >
+                        Blogs
                         { new_blogs && blog_badge}
                     </button>
-                    {/* <button id="projects-link" className="btn btn-default">
-                        <Link to="/projects" className="text-3xl font-semibold">
-                            Projects
-                        </Link>
-                    </button> */}
+                    <button
+                        id="projects-link"
+                        className="btn btn-default text-3xl font-semibold"
+                        onClick={() => navigate("/projects")}
+                    >
+                        Projects
+                    </button>
                 </div>
                 <div id="social-links" className="flex flex-row gap-2 hidden md:inline-flex">
                     {/* <div id="YouTube" className="opacity-10 cursor-pointer" onClick={() => window.open(YOUTUBE_LINK)}>
