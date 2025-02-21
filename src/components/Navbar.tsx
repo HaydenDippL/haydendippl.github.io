@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { useEffect, useState } from "react";
 
 import { ArticleType, new_articles_exist } from "../scripts/ArticleStorage";
 import { log_referring_to } from "../scripts/Logging";
@@ -11,10 +12,20 @@ import { ExternalLink } from "../scripts/ExternalLinks";
 // TODO: add control + K to search bar and icons in the search bar itself it indicate this
 
 export default function Navbar() {
-    const navigate = useNavigate();
+    const [new_blogs, set_new_blogs] = useState<boolean>(new_articles_exist(ArticleType.blog));
+    const [new_projects, set_new_projects] = useState<boolean>(new_articles_exist(ArticleType.project));
 
-    const new_blogs: boolean = new_articles_exist(ArticleType.blog);
-    const new_projects: boolean = new_articles_exist(ArticleType.project);
+    useEffect(() => {
+        const handleArticleViewed = () => {
+            set_new_blogs(new_articles_exist(ArticleType.blog));
+            set_new_projects(new_articles_exist(ArticleType.project));
+        };
+        
+        window.addEventListener('articleViewed', handleArticleViewed);
+        return () => window.removeEventListener('articleViewed', handleArticleViewed);
+    }, []);
+
+    const navigate = useNavigate();
     
     const new_article_badge: JSX.Element = <div className={`absolute z-[999] w-5 h-5 -top-2 -right-2 bg-secondary mask mask-circle`} />
 

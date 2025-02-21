@@ -11,10 +11,8 @@ export default function ArticleContent({ mode, article }: { mode: ArticleType, a
     useEffect(() => {
         const article_is_new: boolean = !article_is_viewed_in_local_storage(article.id, mode);
         set_new_article(article_is_new);
-
-        return () => {
-            set_article_memory_in_local_storage(article.id, true, mode);
-        };
+        set_article_memory_in_local_storage(article.id, true, mode);
+        window.dispatchEvent(new Event('articleViewed'));
     }, []);
 
     const viewed: Boolean = !new_article;
