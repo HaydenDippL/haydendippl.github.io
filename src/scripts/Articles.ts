@@ -32,8 +32,8 @@ export function get_article(id: string | undefined, mode: ArticleType): ArticleD
 export function get_article_previews(mode: ArticleType): ArticlePreviewData[] {
     const articles: ArticleData[] = get_released_articles(mode);
 
-    return articles.map(({ id, starred, published, image, title, description, technologies }) => ({
-        id, starred, published, image, title, description, technologies
+    return articles.map(({ id, starred, published, image, title, description, technologies, article_type }) => ({
+        id, starred, published, image, title, description, technologies, article_type
     }));
 }
 

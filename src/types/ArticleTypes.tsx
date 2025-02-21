@@ -1,3 +1,4 @@
+import { ArticleType } from "../scripts/ArticleStorage";
 import { Tech } from "./TechTypes";
 
 export type ArticlePreviewData = {
@@ -7,7 +8,8 @@ export type ArticlePreviewData = {
     image: string,
     title: string,
     description: string,
-    technologies: Tech[]
+    technologies: Tech[],
+    article_type: ArticleType
 };
 
 export type ArticleData = {
@@ -21,6 +23,7 @@ export type ArticleData = {
     created: string,
     modified: string,
     content: JSX.Element,
+    article_type: ArticleType
 };
 
 export type PinnedRecentBlogs = {
