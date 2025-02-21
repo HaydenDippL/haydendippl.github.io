@@ -19,13 +19,13 @@ export type TechBadgeProps = {
 }
 
 export const badge_colors: Record<Tech, string> = {
-    [Tech.Angular]: "#cf44f9",
-    [Tech.Cpp]: "#659bd3",
+    [Tech.Angular]: "#e90363",
+    [Tech.Cpp]: "#365997",
     [Tech.Django]: "#0c4b33",
     [Tech.React]: "#58c4dc",
-    [Tech.DotNET]: "#bb74da",
+    [Tech.DotNET]: "#5233cb",
     [Tech.Python]: "#ffdf5d",
-    [Tech.SQL]: "#c5df2f",
+    [Tech.SQL]: "#56ee78",
     [Tech.TypeScript]: "#3178c6",
 }
 
@@ -35,7 +35,7 @@ export const badge_text_colors: Record<Tech, string> = {
     [Tech.Django]: "#ffffff",
     [Tech.React]: "#000000",
     [Tech.DotNET]: "#ffffff",
-    [Tech.Python]: "#ffffff",
+    [Tech.Python]: "#000000",
     [Tech.SQL]: "#000000",
     [Tech.TypeScript]: "#ffffff",
 }
