@@ -10,6 +10,9 @@ import { get_pinned_and_recent } from "../scripts/Blogs";
 import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import TechButton from "../components/TechButton";
 import { Tech } from "../types/TechTypes";
+import Carousel from "../components/Carousel";
+import { get_carousel_previews } from "../scripts/Projects";
+import ProjectCard from "../components/ProjectCard";
 
 export default function Home() {
     const profile_picture_element: JSX.Element = <div id="Picture" className="relative w-max pb-12">
@@ -21,6 +24,16 @@ export default function Home() {
         />
     </div>
 
+    function get_project_cards(): JSX.Element[] {
+        return get_carousel_previews()
+            .map((project, i) => <ProjectCard key={i} {...project} />);
+    }
+
+    const [project_cards, set_project_cards] = useState<JSX.Element[]>(get_project_cards());
+    useEffect(() => {
+        set_project_cards(get_project_cards());
+    }, []);
+
     return <div className="flex flex-row w-full justify-center">
         <div className="flex flex-col w-full items-center">
             <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] text-white font-inter relative">
@@ -31,7 +44,7 @@ export default function Home() {
                     <p className="subtitle-text font-bold opacity-50">Madison, WI</p>
                 </div>
                 <div className="2xl:hidden">{ profile_picture_element }</div>
-                <p id="intro" className="content-text">I am a full-stack developer graduating from the University of Wisconsin in the spring of 2025. I have experience with...</p>
+                <p id="intro" className="content-text mb-4">I am a full-stack developer graduating from the University of Wisconsin in the spring of 2025. I have experience with...</p>
                 <div id="skills" className="content-text flex flex-wrap gap-x-3.5 gap-y-2 mb-16">
                     <TechButton tech={Tech.React} />
                     <TechButton tech={Tech.Angular} />
@@ -44,9 +57,8 @@ export default function Home() {
                 </div>
                 <p className="title-text">Check Out My <Link to="/projects" className="underline" style={{"color": "#6dfff8"}}>Projects</Link></p>
             </div>
-            {/* TODO: implement carousel */}
-            {/* <Carousel /> */}
-            <div className="flex flex-col items-center font-inter mb-16">
+            <Carousel items={project_cards} />
+            <div className="flex flex-col items-center font-inter my-16">
                 <button className="btn btn-secondary btn-lg">Download Resume</button>
             </div>
             <div className="divider w-[90%] lg:w-[70%] mx-auto mb-12" />
