@@ -19,8 +19,6 @@ export default function Blog() {
         return <ArticleNotFound mode={ArticleType.blog} />
     
     return <div className="flex flex-col justify-center items-center w-full max-md:mt-8">
-        <div className="flex flex-col w-fill items-center p-4">
-            <ArticleContent mode={ArticleType.blog} article={blog} />
-        </div>
+        <ArticleContent mode={ArticleType.blog} article={blog} />
     </div>
 }
