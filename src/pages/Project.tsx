@@ -4,8 +4,8 @@ import { useParams } from "react-router";
 import { ProjectData } from "../types/ProjectTypes";
 
 import ArticleContent, { ArticleNotFound } from "../components/ArticleContent";
-import { ArticleType } from "../scripts/ArticleStorage";
 import { get_article } from "../scripts/Articles";
+import { ArticleType } from "../types/ArticleTypes";
 
 export default function Project() {
     const { id } = useParams();

@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
 
-import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
+import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
+import { ArticleType } from "../types/ArticleTypes";
 
 import { BlogPreviewProps } from "../types/BlogTypes";
 

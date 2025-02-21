@@ -1,12 +1,8 @@
 import { get_article_ids } from "./Articles";
+import { ArticleType } from "../types/ArticleTypes";
 
 const BLOG_MEMORY_KEY: string = "BLOG_MEMORY";
 const PROJECT_MEMORY_KEY: string = "PROJECT_MEMORY";
-
-export enum ArticleType {
-    "blog",
-    "project"
-}
 
 export const NOT_VIEWED: string = "0";
 export const VIEWED: string = "1";

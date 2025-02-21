@@ -4,7 +4,7 @@ import ProjectCard from "../components/ProjectCard"
 import { ExternalLink } from "../scripts/ExternalLinks";
 import { log_referring_to } from "../scripts/Logging";
 import { get_article_previews } from "../scripts/Articles";
-import { ArticleType } from "../scripts/ArticleStorage";
+import { ArticleType } from "../types/ArticleTypes";
 
 function get_cards(): JSX.Element[] {
     return get_article_previews(ArticleType.project)

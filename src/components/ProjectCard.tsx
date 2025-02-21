@@ -3,7 +3,8 @@ import { Link } from "react-router";
 
 import TechBadge from "./TechBadge";
 
-import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
+import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
+import { ArticleType } from "../types/ArticleTypes";
 
 import { ProjectPreviewData } from "../types/ProjectTypes";
 
@@ -33,9 +34,9 @@ export default function ProjectCard({ id, starred, published, image, title, desc
     const display: boolean = !viewed || starred;
     const badge: JSX.Element = <div className={`absolute z-[999] ${size} ${placement} ${color} ${mask}`} />;
 
-    return <Link to={`/project/${id}`} className="relative transform transition-transform duration-300 hover:scale-110">
-        { display && badge }
-        <div className="card bg-base-100 image-full w-96 shadow-xl">
+    return <Link to={`/project/${id}`} className="relative">
+        <div className="card bg-base-100 image-full w-96 shadow-xl transform transition-transform duration-300 hover:scale-110">
+            { display && badge }
             <figure>
                 { image_loading && <div className="w-full h-48 skeleton rounded-b-none" /> }
                 { !image_loading && <img

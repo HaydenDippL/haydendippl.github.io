@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import BlogCard from "../components/BlogCard";
 import { BlogPreviewData } from "../types/BlogTypes";
 import { get_article_previews } from "../scripts/Articles";
-import { ArticleType } from "../scripts/ArticleStorage";
+import { ArticleType } from "../types/ArticleTypes";
 
 const total_skeleton_elements: number = 8;
 const skeleton: JSX.Element[] = Array.from({ length: total_skeleton_elements }).map((_, i) => <BlogCard key={i} />);

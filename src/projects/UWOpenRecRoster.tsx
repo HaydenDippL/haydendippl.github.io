@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Tech } from "../types/TechTypes";
-import { ArticleData } from "../types/ArticleTypes";
+import { ArticleData, ArticleType } from "../types/ArticleTypes";
 
 const now: string = DateTime.now().toISODate();
 
@@ -18,5 +18,6 @@ export const UWOpenRecRosterProject: ArticleData = {
     modified: now,
     image: "https://uqwajwnxrblspjafxmyc.supabase.co/storage/v1/object/public/HaydenDippL.io%20Assets//UWOepnRecRoster.png",
     content: content,
-    technologies: [Tech.SQL, Tech.React]
+    technologies: [Tech.SQL, Tech.React],
+    article_type: ArticleType.project
 };

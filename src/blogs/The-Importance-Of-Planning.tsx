@@ -1,5 +1,6 @@
 import { DateTime } from "luxon"
-import { ArticleData } from "../types/ArticleTypes";
+import { ArticleData, ArticleType } from "../types/ArticleTypes";
+import { Tech } from "../types/TechTypes";
 
 const now: string = DateTime.now().toISODate();
 
@@ -36,5 +37,6 @@ export const TheImportanceOfPlanningBlog: ArticleData = {
     modified: now,
     image: "https://uqwajwnxrblspjafxmyc.supabase.co/storage/v1/object/public/HaydenDippL.io%20Assets//SpidermanGlassesSDLCMeme.png",
     content: content,
-    technologies: []
+    technologies: [Tech.React],
+    article_type: ArticleType.blog
 };

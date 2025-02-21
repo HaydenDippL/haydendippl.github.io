@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 
-import { ArticleType, new_articles_exist } from "../scripts/ArticleStorage";
+import { new_articles_exist } from "../scripts/ArticleStorage";
+import { ArticleType } from "../types/ArticleTypes";
 import { log_referring_to } from "../scripts/Logging";
 
 import { useNavigate } from "react-router";

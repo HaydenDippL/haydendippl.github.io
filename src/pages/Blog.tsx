@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { BlogData } from "../types/BlogTypes";
 
 import ArticleContent, { ArticleNotFound } from "../components/ArticleContent";
-import { ArticleType } from "../scripts/ArticleStorage";
+import { ArticleType } from "../types/ArticleTypes";
 import { get_article } from "../scripts/Articles";
 
 export default function Blog() {

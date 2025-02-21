@@ -1,4 +1,3 @@
-import { ArticleType } from "../scripts/ArticleStorage";
 import { Tech } from "./TechTypes";
 
 export type ArticlePreviewData = {
@@ -30,3 +29,8 @@ export type PinnedRecentBlogs = {
     pinned: ArticlePreviewData[],
     recent: ArticlePreviewData[]
 };
+
+export enum ArticleType {
+    blog = "blog",
+    project = "project"
+}

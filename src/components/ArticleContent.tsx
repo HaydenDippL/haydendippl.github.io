@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { ArticleType, article_is_viewed_in_local_storage, set_article_memory_in_local_storage } from "../scripts/ArticleStorage";
+import { article_is_viewed_in_local_storage, set_article_memory_in_local_storage } from "../scripts/ArticleStorage";
 import { DateTime } from "luxon";
 import { BlogData } from "../types/BlogTypes";
 import { ProjectData } from "../types/ProjectTypes";
 import { Link } from "react-router";
+import { ArticleType } from "../types/ArticleTypes";
 
 export default function ArticleContent({ mode, article }: { mode: ArticleType, article: ProjectData | BlogData }) {
     const [new_article, set_new_article] = useState<boolean>(false);

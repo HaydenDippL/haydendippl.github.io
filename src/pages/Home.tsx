@@ -7,12 +7,13 @@ import globe_icon from "../assets/globe-icon.svg"
 import { PinnedRecentBlogs } from "../types/BlogTypes";
 
 import { get_pinned_and_recent } from "../scripts/Articles";
-import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
+import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import TechButton from "../components/TechButton";
 import { Tech } from "../types/TechTypes";
 import Carousel from "../components/Carousel";
 import { get_carousel_previews } from "../scripts/Articles";
 import ProjectCard from "../components/ProjectCard";
+import { ArticleType } from "../types/ArticleTypes";
 
 export default function Home() {
     const profile_picture_element: JSX.Element = <div id="Picture" className="relative w-max pb-12">
@@ -46,14 +47,14 @@ export default function Home() {
                 <div className="2xl:hidden">{ profile_picture_element }</div>
                 <p id="intro" className="content-text mb-4">I am a full-stack developer graduating from the University of Wisconsin in the spring of 2025. I have experience with...</p>
                 <div id="skills" className="content-text flex flex-wrap gap-x-3.5 gap-y-2 mb-16">
-                    <TechButton tech={Tech.React} />
-                    <TechButton tech={Tech.Angular} />
-                    <TechButton tech={Tech.TypeScript} />
-                    <TechButton tech={Tech.Django} />
-                    <TechButton tech={Tech.Python} />
-                    <TechButton tech={Tech.SQL} />
-                    <TechButton tech={Tech.DotNET} />
-                    <TechButton tech={Tech.Cpp} />
+                    <TechButton tech={Tech.React} link={`/articles/${Tech.React}`}/>
+                    <TechButton tech={Tech.Angular} link={`/articles/${Tech.Angular}`}/>
+                    <TechButton tech={Tech.TypeScript} link={`/articles/${Tech.TypeScript}`}/>
+                    <TechButton tech={Tech.Django} link={`/articles/${Tech.Django}`}/>
+                    <TechButton tech={Tech.Python} link={`/articles/${Tech.Python}`}/>
+                    <TechButton tech={Tech.SQL} link={`/articles/${Tech.SQL}`}/>
+                    <TechButton tech={Tech.DotNET} link={`/articles/${Tech.DotNET}`}/>
+                    <TechButton tech={Tech.Cpp} link={`/articles/${Tech.Cpp}`}/>
                 </div>
                 <p className="title-text">Check Out My <Link to="/projects" className="underline" style={{"color": "#6dfff8"}}>Projects</Link></p>
             </div>
