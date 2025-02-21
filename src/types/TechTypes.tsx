@@ -9,6 +9,10 @@ export enum Tech {
     "TypeScript" = "TypeScript"
 }
 
+export function is_tech(tech: string): boolean {
+    return Object.values(Tech).includes(tech as Tech);
+}
+
 export type TechButtonProps = {
     tech: Tech,
     link?: string
