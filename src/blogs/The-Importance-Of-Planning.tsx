@@ -1,5 +1,5 @@
 import { DateTime } from "luxon"
-import { BlogData } from "../types/BlogTypes"
+import { ArticleData } from "../types/ArticleTypes";
 
 const now: string = DateTime.now().toISODate();
 
@@ -26,7 +26,7 @@ const content: JSX.Element = <>
     <p>don't code on the first day</p>
 </>
 
-export const TheImportanceOfPlanningBlog: BlogData = {
+export const TheImportanceOfPlanningBlog: ArticleData = {
     id: 0,
     title: "The Importance of Planning",
     description: "How spending a day of planning can save you weeks in your project",
@@ -35,5 +35,6 @@ export const TheImportanceOfPlanningBlog: BlogData = {
     published: now,
     modified: now,
     image: "https://uqwajwnxrblspjafxmyc.supabase.co/storage/v1/object/public/HaydenDippL.io%20Assets//SpidermanGlassesSDLCMeme.png",
-    content: content
+    content: content,
+    technologies: []
 };

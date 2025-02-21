@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react"
 
-import { get_released_project_previews } from "../scripts/Projects"
-
 import ProjectCard from "../components/ProjectCard"
 import { ExternalLink } from "../scripts/ExternalLinks";
 import { log_referring_to } from "../scripts/Logging";
+import { get_article_previews } from "../scripts/Articles";
+import { ArticleType } from "../scripts/ArticleStorage";
 
-function get_cards() {
-    console.log(get_released_project_previews())
-    return get_released_project_previews()
+function get_cards(): JSX.Element[] {
+    return get_article_previews(ArticleType.project)
         .map((project_preview, i) => <ProjectCard key={i} {...project_preview} />)
 }
 

@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
-import { ProjectData } from "../types/ProjectTypes";
 import { Tech } from "../types/TechTypes";
+import { ArticleData } from "../types/ArticleTypes";
 
 const now: string = DateTime.now().toISODate();
 
@@ -8,7 +8,7 @@ const content: JSX.Element = <>
     <p></p>
 </>
 
-export const UWOpenRecRosterProject: ProjectData = {
+export const UWOpenRecRosterProject: ArticleData = {
     id: 0,
     title: "UWOpenRecRoster",
     description: "How I fixed my schools court shedule problem",

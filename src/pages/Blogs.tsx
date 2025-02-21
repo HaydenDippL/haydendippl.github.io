@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { get_blog_previews } from "../scripts/Blogs";
-
 import BlogCard from "../components/BlogCard";
 import { BlogPreviewData } from "../types/BlogTypes";
+import { get_article_previews } from "../scripts/Articles";
+import { ArticleType } from "../scripts/ArticleStorage";
 
 const total_skeleton_elements: number = 8;
 const skeleton: JSX.Element[] = Array.from({ length: total_skeleton_elements }).map((_, i) => <BlogCard key={i} />);
@@ -13,7 +13,7 @@ export default function Blogs() {
     const [cards, set_cards] = useState<JSX.Element[]>(skeleton);
 
     useEffect(() => {
-        const blog_previews: BlogPreviewData[] = get_blog_previews();
+        const blog_previews: BlogPreviewData[] = get_article_previews(ArticleType.blog);
         const blog_cards: JSX.Element[] = blog_previews.map((blog_preview, i) => {
             return <BlogCard key={i} {...blog_preview} />
         });

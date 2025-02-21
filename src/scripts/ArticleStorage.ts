@@ -1,5 +1,4 @@
-import { get_blog_ids } from "./Blogs";
-import { get_project_ids } from "./Projects";
+import { get_article_ids } from "./Articles";
 
 const BLOG_MEMORY_KEY: string = "BLOG_MEMORY";
 const PROJECT_MEMORY_KEY: string = "PROJECT_MEMORY";
@@ -50,7 +49,7 @@ export function set_article_memory_in_local_storage(id: number, viewed: true, mo
 
 export function new_articles_exist(mode: ArticleType): boolean {
     const memory: string = get_article_memory_from_local_storage(mode);
-    const num_articles: number = (mode === ArticleType.blog) ? get_blog_ids().length : get_project_ids().length;
+    const num_articles: number = get_article_ids(mode).length;
     if (num_articles > memory.length) return true;
     return Array.from(memory).some((article) => article === NOT_VIEWED);
 }

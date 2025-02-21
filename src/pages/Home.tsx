@@ -6,12 +6,12 @@ import globe_icon from "../assets/globe-icon.svg"
 
 import { PinnedRecentBlogs } from "../types/BlogTypes";
 
-import { get_pinned_and_recent } from "../scripts/Blogs";
+import { get_pinned_and_recent } from "../scripts/Articles";
 import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import TechButton from "../components/TechButton";
 import { Tech } from "../types/TechTypes";
 import Carousel from "../components/Carousel";
-import { get_carousel_previews } from "../scripts/Projects";
+import { get_carousel_previews } from "../scripts/Articles";
 import ProjectCard from "../components/ProjectCard";
 
 export default function Home() {

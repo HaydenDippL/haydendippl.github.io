@@ -3,17 +3,16 @@ import { useParams } from "react-router";
 
 import { ProjectData } from "../types/ProjectTypes";
 
-import { get_project } from "../scripts/Projects";
-
 import ArticleContent, { ArticleNotFound } from "../components/ArticleContent";
 import { ArticleType } from "../scripts/ArticleStorage";
+import { get_article } from "../scripts/Articles";
 
 export default function Project() {
     const { id } = useParams();
     const [project, set_project] = useState<ProjectData | undefined>(undefined);
 
     useEffect(() => {
-        set_project(get_project(id));
+        set_project(get_article(id, ArticleType.project));
     }, [id]);
 
     if (project === undefined) {
