@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { ProjectData, ProjectPreviewData, ProjectPreviewProps } from "../types/ProjectTypes";
+import { ProjectData, ProjectPreviewData } from "../types/ProjectTypes";
 
 import {
     UWOpenRecRosterProject
@@ -35,24 +35,19 @@ export function get_project(id: string | undefined): ProjectData | undefined {
     return project;
 }
 
-export function get_project_previews(): ProjectPreviewProps[] {
-    return get_released_projects().map((project) => {
-        return {
-            id: project.id,
-            starred: project.starred,
-            published: project.published,
-            image: project.image,
-            title: project.title,
-            description: project.description,
-        } as ProjectPreviewData;
-    }).sort((a, b) => {
-        const a_ms = DateTime.fromISO(a.published).toMillis();
-        const b_ms = DateTime.fromISO(b.published).toMillis();
-        return b_ms - a_ms;
-    });
+export function get_released_project_previews(): ProjectPreviewData[] {
+    return get_released_projects()
+        .map(({ id, starred, published, image, title, description, technologies }) => ({
+            id,
+            starred,
+            published,
+            image,
+            title,
+            description,
+            technologies
+        }));
 }
-
-export function get_carousel_previews(): ProjectPreviewProps[] {
+export function get_carousel_previews(): ProjectPreviewData[] {
     const MAX_PROJECTS = 10;
     
     const starred_projects: ProjectData[] = projects.filter((project) => project.starred);
@@ -78,6 +73,7 @@ export function get_carousel_previews(): ProjectPreviewProps[] {
             image: project.image,
             title: project.title,
             description: project.description,
+            technologies: project.technologies
         } as ProjectPreviewData;
     });
 }
