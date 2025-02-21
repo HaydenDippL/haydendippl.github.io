@@ -8,8 +8,8 @@ import { PinnedRecentBlogs } from "../types/BlogTypes";
 
 import { get_pinned_and_recent } from "../scripts/Blogs";
 import { ArticleType, article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
-import TechBadge from "../components/TechBadge";
-import { Tech } from "../types/TechBadge";
+import TechButton from "../components/TechButton";
+import { Tech } from "../types/TechTypes";
 
 export default function Home() {
     const profile_picture_element: JSX.Element = <div id="Picture" className="relative w-max pb-12">
@@ -33,14 +33,14 @@ export default function Home() {
                 <div className="2xl:hidden">{ profile_picture_element }</div>
                 <p id="intro" className="content-text">I am a full-stack developer graduating from the University of Wisconsin in the spring of 2025. I have experience with...</p>
                 <div id="skills" className="content-text flex flex-wrap gap-x-3.5 gap-y-2 mb-16">
-                    <TechBadge tech={Tech.React} size="lg" transparent={true} grow={true} />
-                    <TechBadge tech={Tech.Angular} size="lg" transparent={true} grow={true} />
-                    <TechBadge tech={Tech.TypeScript} size="lg" transparent={true} grow={true} />
-                    <TechBadge tech={Tech.Django} size="lg" transparent={true} grow={true} />
-                    <TechBadge tech={Tech.Python} size="lg" transparent={true} grow={true} />
-                    <TechBadge tech={Tech.SQL} size="lg" transparent={true} grow={true} />
-                    <TechBadge tech={Tech.DotNET} size="lg" transparent={true} grow={true} />
-                    <TechBadge tech={Tech.Cpp} size="lg" transparent={true} grow={true} />
+                    <TechButton tech={Tech.React} />
+                    <TechButton tech={Tech.Angular} />
+                    <TechButton tech={Tech.TypeScript} />
+                    <TechButton tech={Tech.Django} />
+                    <TechButton tech={Tech.Python} />
+                    <TechButton tech={Tech.SQL} />
+                    <TechButton tech={Tech.DotNET} />
+                    <TechButton tech={Tech.Cpp} />
                 </div>
                 <p className="title-text">Check Out My <Link to="/projects" className="underline" style={{"color": "#6dfff8"}}>Projects</Link></p>
             </div>
