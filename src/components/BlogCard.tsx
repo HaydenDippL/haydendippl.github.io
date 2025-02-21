@@ -33,7 +33,6 @@ export default function BlogCard(blog_preview: BlogPreviewProps) {
         };
     }, [blog_preview.image]);
 
-    /// TODO: implement cache / cookies, account for the no_next / no_prev cards and don't display badges for them
     const viewed: Boolean = article_is_viewed_in_local_storage(blog_preview.id as number, ArticleType.blog);
     const color: string = viewed ? "bg-primary" : "bg-secondary";
     const mask: string = blog_preview.starred ? "mask mask-star-2 " : "mask mask-circle";
