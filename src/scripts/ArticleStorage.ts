@@ -34,10 +34,11 @@ export function set_article_memory_in_local_storage(id: number, viewed: true, mo
     // change memory[id] to BLOG_VIEWED
     const state = (viewed) ? VIEWED : NOT_VIEWED;
     memory = memory.substring(0, id) + state + memory.substring(id + 1);
+    const memory_key: string = (mode === ArticleType.blog) ? BLOG_MEMORY_KEY : PROJECT_MEMORY_KEY;
 
     let successfully_set: boolean = false;
     try {
-        localStorage.setItem(BLOG_MEMORY_KEY, memory);
+        localStorage.setItem(memory_key, memory);
         successfully_set = true;
     } catch (e) {
         console.error(e);
