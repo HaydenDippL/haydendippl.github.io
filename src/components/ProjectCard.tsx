@@ -35,7 +35,7 @@ export default function ProjectCard({ id, starred, published, image, title, desc
     const badge: JSX.Element = <div className={`absolute z-[999] ${size} ${placement} ${color} ${mask}`} />;
 
     return <Link to={`/project/${id}`} className="relative">
-        <div className="card bg-base-100 image-full w-96 shadow-xl transform transition-transform duration-300 hover:scale-110">
+        <div className="card bg-base-100 image-full w-80 md:w-96 shadow-xl transform transition-transform duration-300 hover:scale-110">
             { display && badge }
             <figure>
                 { image_loading && <div className="w-full h-48 skeleton rounded-b-none" /> }
