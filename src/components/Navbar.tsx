@@ -9,9 +9,6 @@ import { useNavigate } from "react-router";
 
 import { ExternalLink } from "../scripts/ExternalLinks";
 
-
-// TODO: add control + K to search bar and icons in the search bar itself it indicate this
-
 export default function Navbar() {
     const [new_blogs, set_new_blogs] = useState<boolean>(new_articles_exist(ArticleType.blog));
     const [new_projects, set_new_projects] = useState<boolean>(new_articles_exist(ArticleType.project));
@@ -38,17 +35,17 @@ export default function Navbar() {
                 </Link>
             </div>
             <div className="flex flex-row gap-24 justify-center w-full md:w-auto">
-                <div id="nav-links" className="flex flex-row gap-8 items-center">
+                <div id="nav-links" className="flex flex-row gap-2 sm:gap-4 md:gap-8 items-center">
                     <button
                         id="home-link"
-                        className="btn btn-default text-3xl font-semibold"
+                        className="btn btn-default font-semibold text-2xl md:text-3xl"
                         onClick={() => navigate("/")}
                     >
                         Home
                     </button>
                     <button
                         id="blogs-link"
-                        className="btn btn-default relative text-3xl font-semibold"
+                        className="btn btn-default relative font-semibold text-2xl md:text-3xl"
                         onClick={() => navigate("/blogs")}
                     >
                         Blogs
@@ -56,7 +53,7 @@ export default function Navbar() {
                     </button>
                     <button
                         id="projects-link"
-                        className="btn btn-default relative text-3xl font-semibold"
+                        className="btn btn-default relative font-semibold text-2xl md:text-3xl"
                         onClick={() => navigate("/projects")}
                     >
                         Projects
