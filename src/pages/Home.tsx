@@ -34,9 +34,9 @@ export default function Home() {
         set_project_cards(get_project_cards());
     }, []);
 
-    return <div className="flex flex-row w-full justify-center">
+    return <div className="flex flex-row w-full justify-center font-inter">
         <div className="flex flex-col w-full items-center">
-            <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] text-white font-inter relative">
+            <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] font-inter relative">
                 <div className="hidden 2xl:inline-block absolute top-4 -right-96">{ profile_picture_element }</div>
                 <p id="hello" className="title-text mb-3">Hi, my name is <span className="text-primary">Hayden Dippel</span></p>
                 <div className="mb-8 md:mb-12">
@@ -90,7 +90,7 @@ export default function Home() {
                 <button className="btn btn-secondary btn-lg">Download Resume</button>
             </div>
             <div className="divider w-[90%] lg:w-[70%] mx-auto mb-12" />
-            <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] text-white font-inter">
+            <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] font-inter">
                 <p className="title-text mb-12">Keep up with my <Link to="/blogs" className="underline" style={{"color": "#6dfff8"}}>Blogs</Link></p>
                 <p className="content-text font-semibold mb-12">I write blogs about now tech, personal experiences, and projects. Here are some of my most recent blogs.</p>
                 <BlogList />
