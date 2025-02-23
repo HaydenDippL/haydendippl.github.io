@@ -4,7 +4,7 @@ import { ArticlePreviewData, ArticleType } from "../types/ArticleTypes";
 import { get_article_previews } from "../scripts/Articles";
 import BlogCard from "../components/BlogCard";
 import ProjectCard from "../components/ProjectCard";
-import { is_tech, Tech } from "../types/TechTypes";
+import { is_tech, Tech, TechBadgeSize } from "../types/TechTypes";
 import { DateTime } from "luxon";
 import TechBadge from "../components/TechBadge";
 
@@ -37,7 +37,7 @@ export default function Articles() {
             if (article_cards.length <= 0) {
                 set_message(<>
                     <p className="content-text mb-8">I haven't made many blog, nor posted all my projects yet :(</p>
-                    <p className="content-text">... Check back soon for my <TechBadge tech={query as Tech} /> content</p>
+                    <p className="content-text">... Check back soon for my <TechBadge tech={query as Tech} size={TechBadgeSize.large} /> content</p>
                 </>);
                 set_articles([]);
             } else {
@@ -57,11 +57,9 @@ export default function Articles() {
         return <ArticlesQueryInvalid />
 
     return <div className="flex flex-col justify-center items-center w-full max-md:mt-8">
-        <div className="flex flex-col w-fill items-center p-4">
-            { message && message }
-            <div id="article-gallery" className="w-3/4 flex flex-row flex-wrap justify-center gap-6 mt-8">
-                { articles.length !== 0 && articles }
-            </div>
+        { message && message }
+        <div id="article-gallery" className="w-3/4 flex flex-row flex-wrap justify-center gap-6 mt-8">
+            { articles.length !== 0 && articles }
         </div>
     </div>
 }
