@@ -48,6 +48,7 @@ export default function TechButton({ tech, link }: TechButtonProps) {
                     borderColor: badge_color,
                     color: text_color
                 }}
+                onClick={() => navigate_to_link()}
             >
                 { tech }
             </button>
