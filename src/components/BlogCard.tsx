@@ -2,20 +2,9 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 
 import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
-import { ArticleType } from "../types/ArticleTypes";
+import { ArticlePreviewData, ArticleType } from "../types/ArticleTypes";
 
-import { BlogPreviewProps } from "../types/BlogTypes";
-
-export default function BlogCard(blog_preview: BlogPreviewProps) {
-    if (
-        blog_preview.id === undefined ||
-        blog_preview.starred === undefined ||
-        blog_preview.published === undefined ||
-        blog_preview.image === undefined ||
-        blog_preview.title === undefined ||
-        blog_preview.description === undefined
-    ) return <></>
-
+export default function BlogCard(blog_preview: ArticlePreviewData) {
     const [image_loading, set_image_loading] = useState<boolean>(true);
     const [image_src, set_image_src] = useState<string>("");
 

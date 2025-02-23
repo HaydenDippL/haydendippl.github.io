@@ -4,11 +4,9 @@ import { Link } from "react-router";
 import TechBadge from "./TechBadge";
 
 import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
-import { ArticleType } from "../types/ArticleTypes";
+import { ArticlePreviewData, ArticleType } from "../types/ArticleTypes";
 
-import { ProjectPreviewData } from "../types/ProjectTypes";
-
-export default function ProjectCard({ id, starred, published, image, title, description, technologies }: ProjectPreviewData) {
+export default function ProjectCard({ id, starred, published, image, title, description, technologies }: ArticlePreviewData) {
     id; starred; published; image; title; description; technologies;
 
     const [image_loading, set_image_loading] = useState<boolean>(true);

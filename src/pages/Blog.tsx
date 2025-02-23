@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router";
 
-import { BlogData } from "../types/BlogTypes";
-
 import ArticleContent, { ArticleNotFound } from "../components/ArticleContent";
-import { ArticleType } from "../types/ArticleTypes";
+import { ArticleData, ArticleType } from "../types/ArticleTypes";
 import { get_article } from "../scripts/Articles";
 
 export default function Blog() {
     const { id } = useParams();
-    const [blog, set_blog] = useState<BlogData | undefined>(undefined);
+    const [blog, set_blog] = useState<ArticleData | undefined>(undefined);
 
     useEffect(() => {
         set_blog(get_article(id, ArticleType.blog));

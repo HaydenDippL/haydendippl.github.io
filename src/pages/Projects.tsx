@@ -19,15 +19,13 @@ export default function Projects() {
         set_cards(get_cards());
     }, [])
     
-    return <>
-        <div className="flex flex-col items-center">
-            <p className="text-6xl font-semibold">Projects</p>
-            <p className="text-xl font-medium p-4 text-center">Check out my <span className="text-primary">projects</span>! I haven't made posts for most of them <span className="text-accent font-bold">yet</span>, come back soon or check my <a className="text-cyan-400 underline" href={ExternalLink.LinkedIn} onClick={() => { log_referring_to("LinkedIn"); }}>LinkedIn</a> for updates.</p>
-            <div className="flex justify-center w-full">
-                <div id="project-gallery" className="w-3/4 flex flex-row flex-wrap justify-center gap-6 mt-8">
-                    { cards }
-                </div>
+    return <div className="flex flex-col items-center">
+        <p className="text-6xl font-semibold">Projects</p>
+        <p className="text-xl font-medium p-4 text-center">Check out my <span className="text-primary">projects</span>! I haven't made posts for most of them <span className="text-accent font-bold">yet</span>, come back soon or check my <a className="text-cyan-400 underline" href={ExternalLink.LinkedIn} onClick={() => { log_referring_to("LinkedIn"); }}>LinkedIn</a> for updates.</p>
+        <div className="flex justify-center w-full">
+            <div id="project-gallery" className="w-3/4 flex flex-row flex-wrap justify-center gap-6 mt-8">
+                { cards }
             </div>
         </div>
-    </>
+    </div>
 }

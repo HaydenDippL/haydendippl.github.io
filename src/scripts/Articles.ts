@@ -1,6 +1,5 @@
 import { ArticleType } from "../types/ArticleTypes";
-import { ArticleData, ArticlePreviewData } from "../types/ArticleTypes";
-import { PinnedRecentBlogs } from "../types/BlogTypes";
+import { ArticleData, ArticlePreviewData, PinnedRecentBlogs } from "../types/ArticleTypes";
 import { DateTime } from "luxon";
 
 /**

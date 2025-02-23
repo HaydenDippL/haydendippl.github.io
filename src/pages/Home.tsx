@@ -4,16 +4,13 @@ import { Link } from "react-router";
 import profile_photo from "../assets/pfp.jpg";
 import globe_icon from "../assets/globe-icon.svg"
 
-import { PinnedRecentBlogs } from "../types/BlogTypes";
-
-import { get_pinned_and_recent } from "../scripts/Articles";
+import { get_pinned_and_recent, get_carousel_previews } from "../scripts/Articles";
 import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import TechButton from "../components/TechButton";
 import { Tech } from "../types/TechTypes";
 import Carousel from "../components/Carousel";
-import { get_carousel_previews } from "../scripts/Articles";
 import ProjectCard from "../components/ProjectCard";
-import { ArticleType } from "../types/ArticleTypes";
+import { ArticleType, PinnedRecentBlogs } from "../types/ArticleTypes";
 import { log_referring_to } from "../scripts/Logging";
 import { ExternalLink } from "../scripts/ExternalLinks";
 
