@@ -41,7 +41,7 @@ export default function Home() {
                 <p id="hello" className="title-text mb-3">Hi, my name is <span className="text-primary">Hayden Dippel</span></p>
                 <div className="mb-8 md:mb-12">
                     <div id="location" className="flex flex-row items-center gap-2">
-                        <img src={globe_icon} alt="Globe Icon" className="w-12 h-12 opacity-70" />
+                        <img src={globe_icon} alt="Globe Icon" className="w-12 h-12" />
                         <p className="subtitle-text font-bold opacity-50">Madison, WI</p>
                     </div>
                     <div className="flex flex-row md:hidden">
