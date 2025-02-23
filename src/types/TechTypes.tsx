@@ -18,8 +18,14 @@ export type TechButtonProps = {
     link?: string
 }
 
+export enum TechBadgeSize {
+    small,
+    large
+}
+
 export type TechBadgeProps = {
     tech: Tech
+    size: TechBadgeSize
 }
 
 export const badge_colors: Record<Tech, string> = {

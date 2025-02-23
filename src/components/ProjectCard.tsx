@@ -5,6 +5,7 @@ import TechBadge from "./TechBadge";
 
 import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import { ArticlePreviewData, ArticleType } from "../types/ArticleTypes";
+import { TechBadgeSize } from "../types/TechTypes";
 
 export default function ProjectCard({ id, starred, published, image, title, description, technologies }: ArticlePreviewData) {
     id; starred; published; image; title; description; technologies;
@@ -47,7 +48,7 @@ export default function ProjectCard({ id, starred, published, image, title, desc
                 <h2 className="card-title text-white">{title}</h2>
                 <p>{description}</p>
                 <div className="flex flex-row gap-1">
-                    { technologies.map((tech, i) => <TechBadge key={i} tech={tech} />) }
+                    { technologies.map((tech, i) => <TechBadge key={i} tech={tech} size={TechBadgeSize.small} />) }
                 </div>
             </div>
         </div>

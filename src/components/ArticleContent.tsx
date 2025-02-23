@@ -3,6 +3,8 @@ import { article_is_viewed_in_local_storage, set_article_memory_in_local_storage
 import { DateTime } from "luxon";
 import { Link } from "react-router";
 import { ArticleData, ArticleType } from "../types/ArticleTypes";
+import TechBadge from "./TechBadge";
+import { TechBadgeSize } from "../types/TechTypes";
 
 export default function ArticleContent({ mode, article }: { mode: ArticleType, article: ArticleData }) {
     const [new_article, set_new_article] = useState<boolean>(false);
@@ -32,11 +34,14 @@ export default function ArticleContent({ mode, article }: { mode: ArticleType, a
             <div className="px-2">
                 <p id="title" className="text-4xl md:text-6xl font-bold mt-8">{article.title}</p>
                 <p id="sub-title" className="text-2xl md:text-3xl font-normal mt-8">{article.description}</p>
-                <div id="dates" className="mt-6 mb-16">
+                <div className="flex flex-row gap-3 mt-4">
+                    { article.technologies.map((tech, i) => <TechBadge key={i} tech={tech} size={TechBadgeSize.large}/>) }
+                </div>
+                <div id="dates" className="mt-2 mb-16">
                     <p id="date-created" className="text-md md:text-xl mt-6">Published: { date_published }</p>
                     { display_modified_date && <p id="date-edited" className="text-xl">Edited: { date_modified }</p> }
                 </div>
-                <div className="prose prose-md md:prose-lg xl:prose-xl">
+                <div id="article" className="prose prose-md md:prose-lg xl:prose-xl">
                     { article.content }
                 </div>
             </div>
