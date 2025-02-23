@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import { ArticlePreviewData, ArticleType } from "../types/ArticleTypes";
+import TechBadge from "./TechBadge";
+import { TechBadgeSize } from "../types/TechTypes";
 
 export default function BlogCard(blog_preview: ArticlePreviewData) {
     const [image_loading, set_image_loading] = useState<boolean>(true);
@@ -41,6 +43,9 @@ export default function BlogCard(blog_preview: ArticlePreviewData) {
             <div className="card-body bg-base-200 rounded-b-2xl">
                 <p className="card-title">{blog_preview.title}</p>
                 <p className="">{blog_preview.description}</p>
+                <div className="flex flex-row gap-1">
+                    { blog_preview.technologies.map((tech, i) => <TechBadge key={i} tech={tech} size={TechBadgeSize.small} />) }
+                </div>
             </div>
         </div>
     </Link>
