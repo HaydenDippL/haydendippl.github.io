@@ -35,8 +35,6 @@ const published: DateTime = DateTime.fromObject(
 );
 const modified: DateTime = created;
 
-console.log("HELLO", DateTime.now().toMillis(), published.toMillis());
-
 export const TheImportanceOfPlanningBlog: ArticleData = {
     id: 0,
     title: "The Importance of Planning",
