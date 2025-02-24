@@ -8,8 +8,6 @@ import { ArticlePreviewData, ArticleType } from "../types/ArticleTypes";
 import { TechBadgeSize } from "../types/TechTypes";
 
 export default function ProjectCard({ id, starred, published, image, title, description, technologies }: ArticlePreviewData) {
-    id; starred; published; image; title; description; technologies;
-
     const [image_loading, set_image_loading] = useState<boolean>(true);
     const [image_src, set_image_src] = useState<string>("");
 

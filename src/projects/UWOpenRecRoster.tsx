@@ -2,11 +2,10 @@ import { DateTime } from "luxon";
 import { Tech } from "../types/TechTypes";
 import { ArticleData, ArticleType } from "../types/ArticleTypes";
 
-const now: string = DateTime.now().toISODate();
-
 const recwell_schedule_link: string = "https://uwmadison.emscloudservice.com/web/CustomBrowseEvents.aspx?data=meoZqrqZMvHKSLWaHS%2f4bjdroAMc1geNvtL12O1chw1fIP%2bOGy79Y1bkm2DPPKqmpSFHyPvFHX3LAJJHEfBPycyxctYlpcHD4rIwd%2byAtBNWXsKhJT9UDchzs%2bSc3Ze6JFHimlPlQrL2Jk7LFEkj3FoTWmA0BKzQQk0%2beDFO2IBZSiNnDXPGZQ%3d%3d";
 
 const content: JSX.Element = <>
+    <p>Repo: <a href="https://github.com/HaydenDippL/BadgerBasketball" target="_blank">https://github.com/HaydenDippL/BadgerBasketball</a></p>
     <h2>The Problem</h2>
     <p>Every week I and hundreds of other students head to the gyms at UW-Madison to play basketball. However, nothing is more annoying than realizing that we can't play basketball because all the courts have been reserved for intramural sports, clubs practices, or others events. This forces us to read the school gyms' online schedule, or rather try... because it sucks. Look for <a href={recwell_schedule_link} target="_blank">yourself</a>.</p>
     <img src="https://uqwajwnxrblspjafxmyc.supabase.co/storage/v1/object/public/HaydenDippL.io%20Assets//RecwellLedger.gif" alt="Ledger gif" />
@@ -61,14 +60,24 @@ const content: JSX.Element = <>
     <p>I would also have used a backend framework. Right now, this project is running on very delicate javascript code that I wrote with only a few months of experience. I woould prefer to have a much more stable and reliable backend powering my proxy.</p>
 </>
 
+const created: DateTime = DateTime.fromObject(
+    { year: 2025, month: 2, day: 24, hour: 1, minute: 0, second: 0 },
+    { zone: "America/Chicago" }
+);
+const published: DateTime = DateTime.fromObject(
+    { year: 2025, month: 2, day: 24, hour: 7, minute: 0, second: 0 },
+    { zone: "America/Chicago" }
+);
+const modified: DateTime = created;
+
 export const UWOpenRecRosterProject: ArticleData = {
     id: 0,
     title: "UW Open Rec Roster",
     description: "How I fixed my UW-Madison's court shedule problem",
     starred: true,
-    created: now,
-    published: now,
-    modified: now,
+    created: created,
+    published: published,
+    modified: modified,
     image: "https://uqwajwnxrblspjafxmyc.supabase.co/storage/v1/object/public/HaydenDippL.io%20Assets//UWOepnRecRoster.png",
     content: content,
     technologies: [Tech.SQL, Tech.React],

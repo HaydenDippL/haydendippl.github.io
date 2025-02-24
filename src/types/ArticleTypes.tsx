@@ -1,9 +1,10 @@
+import { DateTime } from "luxon";
 import { Tech } from "./TechTypes";
 
 export type ArticlePreviewData = {
     id: number,
     starred: boolean,
-    published: string;
+    published: DateTime;
     image: string,
     title: string,
     description: string,
@@ -14,13 +15,13 @@ export type ArticlePreviewData = {
 export type ArticleData = {
     id: number,
     starred: boolean,
-    published: string,
+    published: DateTime,
     image: string,
     title: string,
     description: string,
     technologies: Tech[]
-    created: string,
-    modified: string,
+    created: DateTime,
+    modified: DateTime,
     content: JSX.Element,
     article_type: ArticleType
 };

@@ -110,7 +110,7 @@ export function get_pinned_and_recent(): PinnedRecentBlogs {
 function get_released_articles(mode: ArticleType): ArticleData[] {
     const now: DateTime = DateTime.now();
     const articles: ArticleData[] = (mode === ArticleType.blog) ? blogs : projects;
-    return articles.filter(article => now >= DateTime.fromISO(article.published));
+    return articles.filter(article => now.toMillis() >= article.published.toMillis());
 }
 
 // ---------------------- Projects ------------------------

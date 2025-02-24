@@ -21,8 +21,8 @@ export default function Articles() {
         return articles
             .filter(article => article.technologies.includes(query))
             .sort((a, b) => {
-                const a_publish_time: number = DateTime.fromISO(a.published).toMillis();
-                const b_publish_time: number = DateTime.fromISO(b.published).toMillis();
+                const a_publish_time: number = a.published.toMillis();
+                const b_publish_time: number = b.published.toMillis();
                 return b_publish_time - a_publish_time;
             })
             .map((article, i) => {

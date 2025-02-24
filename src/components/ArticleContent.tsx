@@ -21,8 +21,8 @@ export default function ArticleContent({ mode, article }: { mode: ArticleType, a
     const mask: string = article.starred ? "mask mask-star-2" : "mask mask-circle";
     const display: boolean = !viewed || article.starred;
     const badge_element: JSX.Element = <div className={`absolute -top-6 -right-6 w-12 h-12 ${color} ${mask}`} />;
-    const date_published: string = DateTime.fromISO(article.published).toFormat("LLL d, y");
-    const date_modified: string = DateTime.fromISO(article.modified).toFormat("t ZZZZ, LLL d, y");
+    const date_published: string = article.published.toFormat("LLL d, y");
+    const date_modified: string = article.modified.toFormat("t ZZZZ, LLL d, y");
     const display_modified_date: boolean = article.created !== article.modified;
 
     return <div className="flex flex-col w-full items-center p-4">

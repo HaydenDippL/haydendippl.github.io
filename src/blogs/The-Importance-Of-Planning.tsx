@@ -1,8 +1,6 @@
 import { DateTime } from "luxon"
 import { ArticleData, ArticleType } from "../types/ArticleTypes";
 
-const now: string = DateTime.now().toISODate();
-
 const content: JSX.Element = <>
     <p>As a student, I am far too familiar with this image, being flashed on a slideshow presentation at the start of every semester. I can hear the professor explaining the importance of the SDLC as I am not paying attention - an experience I know I share with many of my classmates... However, the cost of ignoring this diagram during the formative years of my coding progression has cost me months of excess programming and years off of my life. In this blog I want to talk about the SLDC and some tips that help me start a project off right.</p>
     <img src="https://uqwajwnxrblspjafxmyc.supabase.co/storage/v1/object/public/HaydenDippL.io%20Assets//SadLectureHall.png" />
@@ -27,14 +25,26 @@ const content: JSX.Element = <>
     <p>don't code on the first day</p>
 </>
 
+const created: DateTime = DateTime.fromObject(
+    { year: 2025, month: 2, day: 23, hour: 15, minute: 0, second: 0 },
+    { zone: "America/Chicago" }
+);
+const published: DateTime = DateTime.fromObject(
+    { year: 2025, month: 2, day: 24, hour: 7, minute: 0, second: 0 },
+    { zone: "America/Chicago" }
+);
+const modified: DateTime = created;
+
+console.log("HELLO", DateTime.now().toMillis(), published.toMillis());
+
 export const TheImportanceOfPlanningBlog: ArticleData = {
     id: 0,
     title: "The Importance of Planning",
     description: "How spending a day of planning can save you weeks in your project",
     starred: true,
-    created: now,
-    published: now,
-    modified: now,
+    created: created,
+    published: published,
+    modified: modified,
     image: "https://uqwajwnxrblspjafxmyc.supabase.co/storage/v1/object/public/HaydenDippL.io%20Assets//SpidermanGlassesSDLCMeme.png",
     content: content,
     technologies: [],
