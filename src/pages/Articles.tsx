@@ -5,7 +5,6 @@ import { get_article_previews } from "../scripts/Articles";
 import BlogCard from "../components/BlogCard";
 import ProjectCard from "../components/ProjectCard";
 import { is_tech, Tech, TechBadgeSize } from "../types/TechTypes";
-import { DateTime } from "luxon";
 import TechBadge from "../components/TechBadge";
 
 export default function Articles() {

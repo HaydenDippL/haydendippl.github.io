@@ -7,7 +7,7 @@ import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import { ArticlePreviewData, ArticleType } from "../types/ArticleTypes";
 import { TechBadgeSize } from "../types/TechTypes";
 
-export default function ProjectCard({ id, starred, published, image, title, description, technologies }: ArticlePreviewData) {
+export default function ProjectCard({ id, starred, image, title, description, technologies }: ArticlePreviewData) {
     const [image_loading, set_image_loading] = useState<boolean>(true);
     const [image_src, set_image_src] = useState<string>("");
 
