@@ -8,7 +8,7 @@ import { get_pinned_and_recent, get_carousel_previews } from "../scripts/Article
 import { article_is_viewed_in_local_storage } from "../scripts/ArticleStorage";
 import TechButton from "../components/TechButton";
 import { Tech } from "../types/TechTypes";
-import Carousel from "../components/Carousel";
+// import Carousel from "../components/Carousel";
 import ProjectCard from "../components/ProjectCard";
 import { ArticleType, PinnedRecentBlogs } from "../types/ArticleTypes";
 import { log_referring_to } from "../scripts/Logging";
@@ -85,10 +85,13 @@ export default function Home() {
                 </div>
                 <p className="title-text">Check Out My <Link to="/projects" className="underline" style={{"color": "#6dfff8"}}>Projects</Link></p>
             </div>
-            <Carousel items={project_cards} />
-            <div className="flex flex-col items-center font-inter my-16">
-                <button className="btn btn-secondary btn-lg">Download Resume</button>
+            {/* <Carousel items={project_cards} /> */}
+            <div className="flex flex-col items-center p-8">
+                { project_cards}
             </div>
+            {/* <div className="flex flex-col items-center font-inter my-16">
+                <button className="btn btn-secondary btn-lg">Download Resume</button>
+            </div> */}
             <div className="divider w-[90%] lg:w-[70%] mx-auto mb-12" />
             <div className="flex flex-col items-left text-left w-[38rem] max-w-[90%] font-inter">
                 <p className="title-text mb-12">Keep up with my <Link to="/blogs" className="underline" style={{"color": "#6dfff8"}}>Blogs</Link></p>
